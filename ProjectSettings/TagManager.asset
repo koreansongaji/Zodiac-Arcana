@@ -13,10 +13,10 @@ TagManager:
   - 
   - Water
   - UI
-  - CardSlot
-  - Card
-  - 
-  - 
+  - FieldCardSlot
+  - PlayerCard
+  - PlayerCardSlot
+  - EnemyCardSlot
   - 
   - 
   - 
