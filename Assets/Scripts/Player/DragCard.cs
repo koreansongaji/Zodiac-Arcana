@@ -30,7 +30,7 @@ public class DragCard : MonoBehaviour
     {
 
         if (Input.GetMouseButton(0) && !_isMouseClickCoolDown 
-            && (BattleTurnManager.Instance.currentTurn == BattleTurnManager.TurnState.PlayerTurn))
+            && (BattleManager.Instance.currentTurn == TurnState.PlayerTurn))
         {
             if (CurSelectedCard != null)
             {
@@ -86,10 +86,10 @@ public class DragCard : MonoBehaviour
             return; // Ensure the hit object is a card
         }
         //비트, 시프트 연산자 사용했는데 잘 모르겠음;;
-        if (((1 << hitCard.GetComponent<SetPositionCard>().CurrentSlot.gameObject.layer) & _pickUpCardSlotLayerMask) != 0) 
+        if (((1 << hitCard.GetComponent<CardStatus>().CurrentSlot.gameObject.layer) & _pickUpCardSlotLayerMask) != 0) 
         {
             CurSelectedCard = hitCard;
-            _selectedCardOriginalSlot = CurSelectedCard.GetComponent<SetPositionCard>().CurrentSlot;
+            _selectedCardOriginalSlot = CurSelectedCard.GetComponent<CardStatus>().CurrentSlot;
         }
         StartMouseCoolTimer();
     }
@@ -101,8 +101,9 @@ public class DragCard : MonoBehaviour
             _selectedCardOriginalSlot.GetComponent<SlotInfo>().OccupiedCard = null; // Clear the original slot
             CurSelectedCard.transform.position = hitSlot.transform.position;
             CurSelectedCard.GetComponent<SetPositionCard>().SetDropCard();
+            CurSelectedCard.GetComponent<Card>().CompareWithAdjacentCards(); // Compare with adjacent cards after placing
             CurSelectedCard = null;
-            BattleTurnManager.Instance.EndPlayerTurn(); // End player turn after placing the card
+            BattleManager.Instance.EndPlayerTurn(); // End player turn after placing the card
         }
         StartMouseCoolTimer();
     }

@@ -2,17 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Card))]
+[RequireComponent(typeof(CardStatus))]
 public class SetPositionCard : MonoBehaviour
 {
     [SerializeField] private LayerMask _cardSlotLayerMask;
 
-    public GameObject CurrentSlot;
+    private GameObject _currentSlot;
 
+    private CardStatus _cardStatus;
+    private Card _card;
+    private void Awake()
+    {
+        _cardStatus = GetComponent<CardStatus>();
+        _card = GetComponent<Card>();
+    }
     private void OnEnable()
     {
-        CurrentSlot = GetAroundSlot().gameObject;
-        SetPositionCardAroundSlot(CurrentSlot);
-        SetOccupiedCard();
+        if(GetAroundSlot() != null)
+        {
+            _currentSlot = GetAroundSlot().gameObject;
+            _cardStatus.CurrentSlot = _currentSlot;
+            SetPositionCardAroundSlot(_currentSlot);
+            SetOccupiedCard();
+        }
     }
     // Start is called before the first frame update
     void Start()
@@ -28,8 +41,9 @@ public class SetPositionCard : MonoBehaviour
 
     public void SetDropCard()
     {
-        CurrentSlot = GetAroundSlot().gameObject;
-        SetPositionCardAroundSlot(CurrentSlot);
+        _currentSlot = GetAroundSlot().gameObject;
+        _cardStatus.CurrentSlot = _currentSlot;
+        SetPositionCardAroundSlot(_currentSlot);
         SetOccupiedCard();
     }
     public void SetPositionCardAroundSlot(GameObject slot)
@@ -41,7 +55,7 @@ public class SetPositionCard : MonoBehaviour
         GameObject card = this.gameObject;
         if (card != null)
         {
-            SlotInfo slotInfo = CurrentSlot.GetComponent<SlotInfo>();
+            SlotInfo slotInfo = _currentSlot.GetComponent<SlotInfo>();
             if (slotInfo != null)
             {
                 slotInfo.OccupiedCard = card;
