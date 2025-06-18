@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +11,10 @@ public class Card : MonoBehaviour
 
     [SerializeField] private GameObject _playerFace;
     [SerializeField] private GameObject _enemyFace;
+
+    [Header("Skill")]
+    private TeamBuff _teamBuff;
+    [SerializeField] private int _buffAmount = 1; // íŒ€ ë²„í”„ ì ìš©ëŸ‰
     private void Awake()
     {
         _cardStatus = GetComponent<CardStatus>();
@@ -56,22 +60,22 @@ public class Card : MonoBehaviour
         
     }
     /// <summary>
-    /// ±ÙÃ³ Ä«µå¿Í ºñ±³ÇÏ´Â ¸Ş¼­µåÀÔ´Ï´Ù.
+    /// ê·¼ì²˜ ì¹´ë“œì™€ ë¹„êµí•˜ëŠ” ë©”ì„œë“œì…ë‹ˆë‹¤.
     /// </summary>
     public void CompareWithAdjacentCards()
     {   if(_cardStatus?.CurrentSlot?.GetComponent<SlotInfo>()?.LinkedSlots.leftSlot != null
             && _cardStatus?.CurrentSlot?.GetComponent<SlotInfo>()?.LinkedSlots.leftSlot?.GetComponent<SlotInfo>()?.OccupiedCard != null 
             && _cardStatus?.CurrentSlot?.GetComponent<SlotInfo>()?.LinkedSlots.leftSlot?.GetComponent<SlotInfo>()?.OccupiedCard.GetComponent<CardStatus>()?.Stats.Right != null)
         {
-            Debug.Log("¿ŞÂÊ ½½·ÔÀÌ Á¸ÀçÇÕ´Ï´Ù.");
+            Debug.Log("ì™¼ìª½ ìŠ¬ë¡¯ì´ ì¡´ì¬í•©ë‹ˆë‹¤.");
             if (_cardStatus.CurrentSlot.GetComponent<SlotInfo>().LinkedSlots.leftSlot.GetComponent<SlotInfo>().OccupiedCard.GetComponent<CardStatus>().Owner
                 != _cardStatus.Owner)
             {
-                Debug.Log("¿ŞÂÊ ½½·ÔÀÇ Ä«µå¿Í ºñ±³ÇÕ´Ï´Ù.");
+                Debug.Log("ì™¼ìª½ ìŠ¬ë¡¯ì˜ ì¹´ë“œì™€ ë¹„êµí•©ë‹ˆë‹¤.");
                 if (_cardStatus.CurrentSlot.GetComponent<SlotInfo>().LinkedSlots.leftSlot.GetComponent<SlotInfo>()?.OccupiedCard.GetComponent<CardStatus>().Stats.Right
                     < _cardStatus.Stats.Left)
                 {
-                    Debug.Log("¿ŞÂÊ Ä«µå°¡ ÇöÀç Ä«µåº¸´Ù ÀÛ½À´Ï´Ù. ¿ŞÂÊ Ä«µå¸¦ µÚÁı½À´Ï´Ù.");
+                    Debug.Log("ì™¼ìª½ ì¹´ë“œê°€ í˜„ì¬ ì¹´ë“œë³´ë‹¤ ì‘ìŠµë‹ˆë‹¤. ì™¼ìª½ ì¹´ë“œë¥¼ ë’¤ì§‘ìŠµë‹ˆë‹¤.");
                     _cardStatus.CurrentSlot.GetComponent<SlotInfo>().LinkedSlots.leftSlot.GetComponent<SlotInfo>()?.OccupiedCard.GetComponent<Card>().FlipCard();
                 }
             }
@@ -81,7 +85,7 @@ public class Card : MonoBehaviour
             && _cardStatus?.CurrentSlot?.GetComponent<SlotInfo>()?.LinkedSlots.rightSlot?.GetComponent<SlotInfo>()?.OccupiedCard != null
             && _cardStatus?.CurrentSlot?.GetComponent<SlotInfo>()?.LinkedSlots.rightSlot?.GetComponent<SlotInfo>()?.OccupiedCard.GetComponent<CardStatus>()?.Stats.Left != null)
         {
-            Debug.Log("¿À¸¥ÂÊ ½½·ÔÀÌ Á¸ÀçÇÕ´Ï´Ù.");
+            Debug.Log("ì˜¤ë¥¸ìª½ ìŠ¬ë¡¯ì´ ì¡´ì¬í•©ë‹ˆë‹¤.");
             if (_cardStatus.CurrentSlot.GetComponent<SlotInfo>().LinkedSlots.rightSlot.GetComponent<SlotInfo>().OccupiedCard.GetComponent<CardStatus>().Owner
                 != _cardStatus.Owner)
             {
@@ -96,14 +100,14 @@ public class Card : MonoBehaviour
 
         if (_cardStatus?.CurrentSlot?.GetComponent<SlotInfo>()?.LinkedSlots.upSlot != null
             && _cardStatus?.CurrentSlot?.GetComponent<SlotInfo>()?.LinkedSlots.upSlot?.GetComponent<SlotInfo>()?.OccupiedCard != null 
-            && _cardStatus?.CurrentSlot?.GetComponent<SlotInfo>()?.LinkedSlots.upSlot?.GetComponent<SlotInfo>()?.OccupiedCard.GetComponent<CardStatus>()?.Stats.Bottom != null)
+            && _cardStatus?.CurrentSlot?.GetComponent<SlotInfo>()?.LinkedSlots.upSlot?.GetComponent<SlotInfo>()?.OccupiedCard.GetComponent<CardStatus>()?.Stats.Down != null)
         {
-            Debug.Log("À§ÂÊ ½½·ÔÀÌ Á¸ÀçÇÕ´Ï´Ù.");
+            Debug.Log("ìœ„ìª½ ìŠ¬ë¡¯ì´ ì¡´ì¬í•©ë‹ˆë‹¤.");
             if (_cardStatus.CurrentSlot.GetComponent<SlotInfo>().LinkedSlots.upSlot.GetComponent<SlotInfo>().OccupiedCard?.GetComponent<CardStatus>().Owner
                 != _cardStatus.Owner)
             {
-                if (_cardStatus.CurrentSlot.GetComponent<SlotInfo>().LinkedSlots.upSlot.GetComponent<SlotInfo>()?.OccupiedCard.GetComponent<CardStatus>()?.Stats.Bottom
-                    < _cardStatus.Stats.Top)
+                if (_cardStatus.CurrentSlot.GetComponent<SlotInfo>().LinkedSlots.upSlot.GetComponent<SlotInfo>()?.OccupiedCard.GetComponent<CardStatus>()?.Stats.Down
+                    < _cardStatus.Stats.Up)
                 {
                     _cardStatus.CurrentSlot.GetComponent<SlotInfo>().LinkedSlots.upSlot.GetComponent<SlotInfo>()?.OccupiedCard.GetComponent<Card>().FlipCard();
                 }
@@ -112,26 +116,65 @@ public class Card : MonoBehaviour
 
         if (_cardStatus?.CurrentSlot?.GetComponent<SlotInfo>()?.LinkedSlots.downSlot != null
             && _cardStatus?.CurrentSlot?.GetComponent<SlotInfo>()?.LinkedSlots.downSlot?.GetComponent<SlotInfo>()?.OccupiedCard != null
-            && _cardStatus?.CurrentSlot?.GetComponent<SlotInfo>()?.LinkedSlots.downSlot?.GetComponent<SlotInfo>()?.OccupiedCard.GetComponent<CardStatus>()?.Stats.Top != null)
+            && _cardStatus?.CurrentSlot?.GetComponent<SlotInfo>()?.LinkedSlots.downSlot?.GetComponent<SlotInfo>()?.OccupiedCard.GetComponent<CardStatus>()?.Stats.Up != null)
         {
-            Debug.Log("¾Æ·¡ÂÊ ½½·ÔÀÌ Á¸ÀçÇÕ´Ï´Ù.");
+            Debug.Log("ì•„ë˜ìª½ ìŠ¬ë¡¯ì´ ì¡´ì¬í•©ë‹ˆë‹¤.");
             if (_cardStatus.CurrentSlot.GetComponent<SlotInfo>().LinkedSlots.downSlot.GetComponent<SlotInfo>().OccupiedCard?.GetComponent<CardStatus>().Owner
                 != _cardStatus.Owner)
             {
-                if (_cardStatus.CurrentSlot.GetComponent<SlotInfo>().LinkedSlots.downSlot.GetComponent<SlotInfo>()?.OccupiedCard.GetComponent<CardStatus>().Stats.Top
-                    < _cardStatus.Stats.Bottom)
+                if (_cardStatus.CurrentSlot.GetComponent<SlotInfo>().LinkedSlots.downSlot.GetComponent<SlotInfo>()?.OccupiedCard.GetComponent<CardStatus>().Stats.Up
+                    < _cardStatus.Stats.Down)
                 {
                     _cardStatus.CurrentSlot.GetComponent<SlotInfo>().LinkedSlots.downSlot.GetComponent<SlotInfo>()?.OccupiedCard.GetComponent<Card>().FlipCard();
                 }
             }
         }
+        UseSkill();
+        // ì¸ì ‘ ì¹´ë“œ ë¹„êµ ë¡œì§ êµ¬í˜„
+        // ì˜ˆ: í˜„ì¬ ì¹´ë“œì™€ ì¸ì ‘í•œ ì¹´ë“œì˜ ìƒíƒœë¥¼ ë¹„êµí•˜ì—¬ ê²Œì„ ë¡œì§ ì²˜ë¦¬
+        Debug.Log("ì¸ì ‘ ì¹´ë“œì™€ ë¹„êµ ì¤‘ì…ë‹ˆë‹¤.");
+    }
+    private void UseSkill()
+    {
+        if(_cardStatus.CardType == CardType.Normal)
+        {
+            return;
+        }
+        else if(_cardStatus.CardType == CardType.TeamBuff)
+        {
+            if (_teamBuff == null)
+            {
+                _teamBuff = GetComponent<TeamBuff>();
+            }
+            if (_teamBuff != null)
+            {
+                if(_cardStatus.Owner == CardOwner.Player)
+                {
+                    List<GameObject> teamCards = BattleManager.Instance.playerCards;
 
-        // ÀÎÁ¢ Ä«µå ºñ±³ ·ÎÁ÷ ±¸Çö
-        // ¿¹: ÇöÀç Ä«µå¿Í ÀÎÁ¢ÇÑ Ä«µåÀÇ »óÅÂ¸¦ ºñ±³ÇÏ¿© °ÔÀÓ ·ÎÁ÷ Ã³¸®
-        Debug.Log("ÀÎÁ¢ Ä«µå¿Í ºñ±³ ÁßÀÔ´Ï´Ù.");
+                    if (teamCards == null || teamCards.Count == 0)
+                    {
+                        return;
+                    }
+
+                    _teamBuff.ApplyBuffToTeam(teamCards, _buffAmount);
+                }
+                else if (_cardStatus.Owner == CardOwner.Enemy)
+                {
+                    List<GameObject> teamCards = BattleManager.Instance.enemyCards;
+
+                    if (teamCards == null || teamCards.Count == 0)
+                    {
+                        return;
+                    }
+
+                    _teamBuff.ApplyBuffToTeam(teamCards, _buffAmount);
+                }
+            }
+        }
     }
     /// <summary>
-    /// Ä«µå¸¦ µÚÁı´Â ¸Ş¼­µåÀÔ´Ï´Ù. Ä«µåÀÇ »óÅÂ¸¦ º¯°æÇÏ°í ¾Ö´Ï¸ŞÀÌ¼ÇÀ» ½ÇÇàÇÕ´Ï´Ù.
+    /// ì¹´ë“œë¥¼ ë’¤ì§‘ëŠ” ë©”ì„œë“œì…ë‹ˆë‹¤. ì¹´ë“œì˜ ìƒíƒœë¥¼ ë³€ê²½í•˜ê³  ì• ë‹ˆë©”ì´ì…˜ì„ ì‹¤í–‰í•©ë‹ˆë‹¤.
     /// </summary>
     public void FlipCard()
     {
@@ -147,8 +190,8 @@ public class Card : MonoBehaviour
             _enemyFace.SetActive(false);
             _cardStatus.Owner = CardOwner.Player;
         }
-        // Ä«µå ÇÃ¸³ ·ÎÁ÷ ±¸Çö
-        // ¿¹: Ä«µåÀÇ È¸Àü ¾Ö´Ï¸ŞÀÌ¼Ç, »óÅÂ º¯°æ µî
-        Debug.Log("Ä«µå°¡ µÚÁıÇû½À´Ï´Ù.");
+        // ì¹´ë“œ í”Œë¦½ ë¡œì§ êµ¬í˜„
+        // ì˜ˆ: ì¹´ë“œì˜ íšŒì „ ì• ë‹ˆë©”ì´ì…˜, ìƒíƒœ ë³€ê²½ ë“±
+        Debug.Log("ì¹´ë“œê°€ ë’¤ì§‘í˜”ìŠµë‹ˆë‹¤.");
     }
 }
