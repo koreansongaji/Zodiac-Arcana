@@ -27,7 +27,7 @@ public class TeamBuff : MonoBehaviour
             if (cardStatus != null)
             {
                 cardStatus.ChangeStatus((int)buffAmount);
-                Debug.Log($"Buff applied to {card.name}: Up={cardStatus.Stats.Up}, Down={cardStatus.Stats.Down}, Left={cardStatus.Stats.Left}, Right={cardStatus.Stats.Right}");
+                Debug.Log($"Buff applied to {card.name}: Up={cardStatus.Stats.Top}, Down={cardStatus.Stats.Bottom}, Left={cardStatus.Stats.Left}, Right={cardStatus.Stats.Right}");
             }
         }
     }

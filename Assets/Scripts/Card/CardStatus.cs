@@ -5,8 +5,8 @@ using UnityEngine;
 
 public struct CardStats
 {
-    public int Up;
-    public int Down;
+    public int Top;
+    public int Bottom;
     public int Left;
     public int Right;
 }
@@ -33,8 +33,8 @@ public class CardStatus : MonoBehaviour
     private SetPositionCard _setPositionCard;
 
     public CardStats Stats;
-    [SerializeField] private int _up;
-    [SerializeField] private int _down;
+    [SerializeField] private int _top;
+    [SerializeField] private int _bottom;
     [SerializeField] private int _left;
     [SerializeField] private int _right;
 
@@ -45,8 +45,8 @@ public class CardStatus : MonoBehaviour
     public GameObject CurrentSlot;
     private void Awake()
     {
-        Stats.Up = _up;
-        Stats.Down = _down;
+        Stats.Top = _top;
+        Stats.Bottom = _bottom;
         Stats.Left = _left;
         Stats.Right = _right;
 
@@ -56,8 +56,8 @@ public class CardStatus : MonoBehaviour
 
     public void ChangeStatus(int amount)
     {
-        Stats.Up += amount;
-        Stats.Down += amount;
+        Stats.Top += amount;
+        Stats.Bottom += amount;
         Stats.Left += amount;
         Stats.Right += amount;
         // Update the card's visual representation if needed

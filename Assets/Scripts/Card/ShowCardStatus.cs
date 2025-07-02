@@ -31,11 +31,11 @@ public class ShowCardStatus : MonoBehaviour
     {
         if (_upValue != null)
         {
-            _upValue.text = _cardStatus.Stats.Up.ToString();
+            _upValue.text = _cardStatus.Stats.Top.ToString();
         }
         if (_downValue != null)
         {
-            _downValue.text = _cardStatus.Stats.Down.ToString();
+            _downValue.text = _cardStatus.Stats.Bottom.ToString();
         }
         if (_leftValue != null)
         {

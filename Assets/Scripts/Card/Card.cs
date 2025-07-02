@@ -23,7 +23,16 @@ public class Card : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (_cardStatus.Owner == CardOwner.Player)
+        {
+            _playerFace.SetActive(true);
+            _enemyFace.SetActive(false);
+        }
+        else if (_cardStatus.Owner == CardOwner.Enemy)
+        {
+            _playerFace.SetActive(false);
+            _enemyFace.SetActive(true);
+        }
     }
     private void OnEnable()
     {
@@ -100,14 +109,14 @@ public class Card : MonoBehaviour
 
         if (_cardStatus?.CurrentSlot?.GetComponent<SlotInfo>()?.LinkedSlots.upSlot != null
             && _cardStatus?.CurrentSlot?.GetComponent<SlotInfo>()?.LinkedSlots.upSlot?.GetComponent<SlotInfo>()?.OccupiedCard != null 
-            && _cardStatus?.CurrentSlot?.GetComponent<SlotInfo>()?.LinkedSlots.upSlot?.GetComponent<SlotInfo>()?.OccupiedCard.GetComponent<CardStatus>()?.Stats.Down != null)
+            && _cardStatus?.CurrentSlot?.GetComponent<SlotInfo>()?.LinkedSlots.upSlot?.GetComponent<SlotInfo>()?.OccupiedCard.GetComponent<CardStatus>()?.Stats.Bottom != null)
         {
             Debug.Log("위쪽 슬롯이 존재합니다.");
             if (_cardStatus.CurrentSlot.GetComponent<SlotInfo>().LinkedSlots.upSlot.GetComponent<SlotInfo>().OccupiedCard?.GetComponent<CardStatus>().Owner
                 != _cardStatus.Owner)
             {
-                if (_cardStatus.CurrentSlot.GetComponent<SlotInfo>().LinkedSlots.upSlot.GetComponent<SlotInfo>()?.OccupiedCard.GetComponent<CardStatus>()?.Stats.Down
-                    < _cardStatus.Stats.Up)
+                if (_cardStatus.CurrentSlot.GetComponent<SlotInfo>().LinkedSlots.upSlot.GetComponent<SlotInfo>()?.OccupiedCard.GetComponent<CardStatus>()?.Stats.Bottom
+                    < _cardStatus.Stats.Top)
                 {
                     _cardStatus.CurrentSlot.GetComponent<SlotInfo>().LinkedSlots.upSlot.GetComponent<SlotInfo>()?.OccupiedCard.GetComponent<Card>().FlipCard();
                 }
@@ -116,14 +125,14 @@ public class Card : MonoBehaviour
 
         if (_cardStatus?.CurrentSlot?.GetComponent<SlotInfo>()?.LinkedSlots.downSlot != null
             && _cardStatus?.CurrentSlot?.GetComponent<SlotInfo>()?.LinkedSlots.downSlot?.GetComponent<SlotInfo>()?.OccupiedCard != null
-            && _cardStatus?.CurrentSlot?.GetComponent<SlotInfo>()?.LinkedSlots.downSlot?.GetComponent<SlotInfo>()?.OccupiedCard.GetComponent<CardStatus>()?.Stats.Up != null)
+            && _cardStatus?.CurrentSlot?.GetComponent<SlotInfo>()?.LinkedSlots.downSlot?.GetComponent<SlotInfo>()?.OccupiedCard.GetComponent<CardStatus>()?.Stats.Top != null)
         {
             Debug.Log("아래쪽 슬롯이 존재합니다.");
             if (_cardStatus.CurrentSlot.GetComponent<SlotInfo>().LinkedSlots.downSlot.GetComponent<SlotInfo>().OccupiedCard?.GetComponent<CardStatus>().Owner
                 != _cardStatus.Owner)
             {
-                if (_cardStatus.CurrentSlot.GetComponent<SlotInfo>().LinkedSlots.downSlot.GetComponent<SlotInfo>()?.OccupiedCard.GetComponent<CardStatus>().Stats.Up
-                    < _cardStatus.Stats.Down)
+                if (_cardStatus.CurrentSlot.GetComponent<SlotInfo>().LinkedSlots.downSlot.GetComponent<SlotInfo>()?.OccupiedCard.GetComponent<CardStatus>().Stats.Top
+                    < _cardStatus.Stats.Bottom)
                 {
                     _cardStatus.CurrentSlot.GetComponent<SlotInfo>().LinkedSlots.downSlot.GetComponent<SlotInfo>()?.OccupiedCard.GetComponent<Card>().FlipCard();
                 }
