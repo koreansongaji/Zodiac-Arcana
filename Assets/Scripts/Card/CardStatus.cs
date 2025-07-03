@@ -21,7 +21,8 @@ public enum CardType
     TeamBuff,
     Counter,
     DefenseUp,
-    AttackUp
+    AttackUp,
+    Ability_Nullification //능력 한 번 쓰고 능력이 사라짐
 }
 [RequireComponent(typeof(Card))]
 [RequireComponent(typeof(SetPositionCard))]

@@ -14,7 +14,7 @@ public class Card : MonoBehaviour
 
     [Header("Skill")]
     private TeamBuff _teamBuff;
-    [SerializeField] private int _buffAmount = 1; // 팀 버프 적용량
+    [SerializeField] private int _ability_Amount = 1; // 팀 버프 적용량, 카운터 감소량 등
     private void Awake()
     {
         _cardStatus = GetComponent<CardStatus>();
@@ -36,19 +36,30 @@ public class Card : MonoBehaviour
     }
     private void OnEnable()
     {
+        AddCardToManager();
+    }
+    private void AddCardToManager()
+    {
         if (gameObject.layer == LayerMask.NameToLayer("PlayerCard"))
         {
-            if (!BattleManager.Instance.playerCards.Contains(gameObject))
+            if (!BattleManager.Instance.PlayerCards.Contains(gameObject))
             {
-                BattleManager.Instance.playerCards.Add(gameObject);
+                BattleManager.Instance.PlayerCards.Add(gameObject);
+            }
+            if(BattleManager.Instance.EnemyCards.Contains(gameObject))
+            {
+                BattleManager.Instance.EnemyCards.Remove(gameObject);
             }
         }
         else if (gameObject.layer == LayerMask.NameToLayer("EnemyCard"))
         {
-            if (!BattleManager.Instance.enemyCards.Contains(gameObject))
+            if (!BattleManager.Instance.EnemyCards.Contains(gameObject))
             {
-                BattleManager.Instance.enemyCards.Add(gameObject);
-
+                BattleManager.Instance.EnemyCards.Add(gameObject);
+            }
+            if (BattleManager.Instance.PlayerCards.Contains(gameObject))
+            {
+                BattleManager.Instance.PlayerCards.Remove(gameObject);
             }
         }
     }
@@ -56,11 +67,11 @@ public class Card : MonoBehaviour
     {
         if (gameObject.layer == LayerMask.NameToLayer("PlayerCard"))
         {
-            BattleManager.Instance.playerCards.Remove(gameObject);
+            BattleManager.Instance.PlayerCards.Remove(gameObject);
         }
         else if (gameObject.layer == LayerMask.NameToLayer("EnemyCard"))
         {
-            BattleManager.Instance.enemyCards.Remove(gameObject);
+            BattleManager.Instance.EnemyCards.Remove(gameObject);
         }
     }
     // Update is called once per frame
@@ -159,25 +170,25 @@ public class Card : MonoBehaviour
             {
                 if(_cardStatus.Owner == CardOwner.Player)
                 {
-                    List<GameObject> teamCards = BattleManager.Instance.playerCards;
+                    List<GameObject> teamCards = BattleManager.Instance.PlayerCards;
 
                     if (teamCards == null || teamCards.Count == 0)
                     {
                         return;
                     }
 
-                    _teamBuff.ApplyBuffToTeam(teamCards, _buffAmount);
+                    _teamBuff.ApplyBuffToTeam(teamCards, _ability_Amount);
                 }
                 else if (_cardStatus.Owner == CardOwner.Enemy)
                 {
-                    List<GameObject> teamCards = BattleManager.Instance.enemyCards;
+                    List<GameObject> teamCards = BattleManager.Instance.EnemyCards;
 
                     if (teamCards == null || teamCards.Count == 0)
                     {
                         return;
                     }
 
-                    _teamBuff.ApplyBuffToTeam(teamCards, _buffAmount);
+                    _teamBuff.ApplyBuffToTeam(teamCards, _ability_Amount);
                 }
             }
         }
@@ -199,6 +210,7 @@ public class Card : MonoBehaviour
             _enemyFace.SetActive(false);
             _cardStatus.Owner = CardOwner.Player;
         }
+        AddCardToManager();
         // 카드 플립 로직 구현
         // 예: 카드의 회전 애니메이션, 상태 변경 등
         Debug.Log("카드가 뒤집혔습니다.");

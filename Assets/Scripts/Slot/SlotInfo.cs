@@ -34,11 +34,11 @@ public class SlotInfo : MonoBehaviour
     {
         if (gameObject.layer == LayerMask.NameToLayer("PlayerCardSlot"))
         {
-            BattleManager.Instance.playerSlots.Add(gameObject);
+            BattleManager.Instance.PlayerSlots.Add(gameObject);
         }
         else if (gameObject.layer == LayerMask.NameToLayer("EnemyCardSlot"))
         {
-            BattleManager.Instance.enemySlots.Add(gameObject);
+            BattleManager.Instance.EnemySlots.Add(gameObject);
         }
         else if (gameObject.layer == LayerMask.NameToLayer("FieldCardSlot"))
         {
@@ -51,11 +51,11 @@ public class SlotInfo : MonoBehaviour
 
         if (gameObject.layer == LayerMask.NameToLayer("PlayerCardSlot"))
         {
-            BattleManager.Instance.playerSlots.Remove(gameObject);
+            BattleManager.Instance.PlayerSlots.Remove(gameObject);
         }
         else if (gameObject.layer == LayerMask.NameToLayer("EnemyCardSlot"))
         {
-            BattleManager.Instance.enemySlots.Remove(gameObject);
+            BattleManager.Instance.EnemySlots.Remove(gameObject);
         }
         else if (gameObject.layer == LayerMask.NameToLayer("FieldCardSlot"))
         {

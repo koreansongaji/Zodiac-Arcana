@@ -322,11 +322,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _showCardStatus: {fileID: 5761765831626957857}
-  _top: 5
+  _top: 6
   _bottom: 6
   _left: 7
   _right: 8
-  CardType: 0
+  CardType: 5
   Owner: 0
   CurrentSlot: {fileID: 0}
 --- !u!114 &5729096049618426847

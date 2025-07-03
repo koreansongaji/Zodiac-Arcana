@@ -1,17 +1,22 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
+    [SerializeField] private List<GameObject> _enemyCards;
+    [SerializeField] private List<GameObject> _enemyHandSlots;
     public List<GameObject> EnemyHandCards; // List of enemy cards
     public List<GameObject> EmptySlots;
     // Start is called before the first frame update
     void Start()
     {
-        
     }
-
+    private void OnEnable()
+    {
+        //ResetEnemyAI();
+    }
     // Update is called once per frame
     void Update()
     {
@@ -19,21 +24,26 @@ public class EnemyAI : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (BattleManager.Instance.currentTurn == TurnState.EnemyTurn)
+        if (BattleManager.Instance.CurrentTurn == TurnState.EnemyTurn)
         {
             StartAITurn();
         }
     }
+    //private void ResetEnemyAI()
+    //{
+    //    EnemyHandCards.Clear();
+    //    EnemyHandCards.AddRange(_enemyCards);
+    //}
     public void StartAITurn()
     {
         EnemyHandCards.Clear();
         EmptySlots.Clear();
 
-        foreach (var slotCard in BattleManager.Instance.enemySlots)
+        foreach (var slot in _enemyHandSlots)
         {
-            if (slotCard.GetComponent<SlotInfo>().OccupiedCard != null)
+            if (slot.GetComponent<SlotInfo>().OccupiedCard != null)
             {
-                EnemyHandCards.Add(slotCard.GetComponent<SlotInfo>().OccupiedCard);
+                EnemyHandCards.Add(slot.GetComponent<SlotInfo>().OccupiedCard);
             }
         }
 
@@ -59,7 +69,7 @@ public class EnemyAI : MonoBehaviour
 
         selectedCard.transform.position = selectedSlot.transform.position;
         selectedCard.GetComponent<SetPositionCard>().SetDropCard();
-
+        EnemyHandCards.Remove(selectedCard); // Remove the card from hand after placing it
         BattleManager.Instance.EndEnemyTurn(); // End enemy turn after placing the card
     }
 }

@@ -219,7 +219,7 @@ GameObject:
   - component: {fileID: 5729096049618426847}
   - component: {fileID: 2230933759300525784}
   m_Layer: 10
-  m_Name: Cancer
+  m_Name: Taurus
   m_TagString: Card
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -322,10 +322,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _showCardStatus: {fileID: 5761765831626957857}
-  _top: 5
-  _bottom: 4
+  _top: 6
+  _bottom: 3
   _left: 5
-  _right: 3
+  _right: 6
   CardType: 0
   Owner: 1
   CurrentSlot: {fileID: 0}

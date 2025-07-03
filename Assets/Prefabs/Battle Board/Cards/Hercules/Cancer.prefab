@@ -308,7 +308,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerFace: {fileID: 4031067529533025051}
   _enemyFace: {fileID: 1306569542612047117}
-  _ability_Amount: 0
+  _ability_Amount: 1
 --- !u!114 &8431943449305290937
 MonoBehaviour:
   m_ObjectHideFlags: 0

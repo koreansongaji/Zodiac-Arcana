@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8638104035652503436}
   - component: {fileID: 982350849055468128}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: Enemy Face
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3530456550336416601}
   - component: {fileID: 4565432503472897519}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: Player Face
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,7 +179,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3611922193543524784}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: Graphic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -218,7 +218,7 @@ GameObject:
   - component: {fileID: 8431943449305290937}
   - component: {fileID: 5729096049618426847}
   - component: {fileID: 2230933759300525784}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: Eridanus
   m_TagString: Card
   m_Icon: {fileID: 0}
@@ -308,7 +308,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerFace: {fileID: 4031067529533025051}
   _enemyFace: {fileID: 1306569542612047117}
-  _buffAmount: 2
+  _ability_Amount: 2
 --- !u!114 &8431943449305290937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -400,6 +400,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3611922193543524784}
     m_Modifications:
+    - target: {fileID: 1431463397296087315, guid: 2d614fac037db4642844fbad6b3728c7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1994384657516076663, guid: 2d614fac037db4642844fbad6b3728c7,
         type: 3}
       propertyPath: m_SortingOrder
@@ -510,10 +515,35 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5748773088072253751, guid: 2d614fac037db4642844fbad6b3728c7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764962115557389139, guid: 2d614fac037db4642844fbad6b3728c7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6069079849418216049, guid: 2d614fac037db4642844fbad6b3728c7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7788119104903909699, guid: 2d614fac037db4642844fbad6b3728c7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8081260904918007096, guid: 2d614fac037db4642844fbad6b3728c7,
         type: 3}
       propertyPath: m_Name
       value: Card Status
+      objectReference: {fileID: 0}
+    - target: {fileID: 8081260904918007096, guid: 2d614fac037db4642844fbad6b3728c7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8859323889849457542, guid: 2d614fac037db4642844fbad6b3728c7,
         type: 3}

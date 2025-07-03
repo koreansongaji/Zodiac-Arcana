@@ -326,7 +326,7 @@ MonoBehaviour:
   _bottom: 2
   _left: 3
   _right: 4
-  CardType: 0
+  CardType: 1
   Owner: 0
   CurrentSlot: {fileID: 0}
 --- !u!114 &5729096049618426847

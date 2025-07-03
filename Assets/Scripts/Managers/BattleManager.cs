@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,20 +6,20 @@ public enum TurnState { PlayerTurn, EnemyTurn }
 
 public class BattleManager : Singleton<BattleManager>
 {
-    public TurnState currentTurn { get; private set; } //ÀĞ±â¸¸ °¡´É
+    public TurnState CurrentTurn { get; private set; } //ì½ê¸°ë§Œ ê°€ëŠ¥
 
-    public List<GameObject> playerCards; // ÇÃ·¹ÀÌ¾î Ä«µå ¸ñ·Ï
-    public List<GameObject> enemyCards; // Àû Ä«µå ¸ñ·Ï
-    public List<GameObject> playerSlots; // ÇÃ·¹ÀÌ¾î ½½·Ô ¸ñ·Ï
-    public List<GameObject> enemySlots; // Àû ½½·Ô ¸ñ·Ï
-    public List<GameObject> FieldSlots; // ÇÊµå ½½·Ô ¸ñ·Ï
+    public List<GameObject> PlayerCards; // í”Œë ˆì´ì–´ ì¹´ë“œ ëª©ë¡
+    public List<GameObject> EnemyCards; // ì  ì¹´ë“œ ëª©ë¡
+    public List<GameObject> PlayerSlots; // í”Œë ˆì´ì–´ ìŠ¬ë¡¯ ëª©ë¡
+    public List<GameObject> EnemySlots; // ì  ìŠ¬ë¡¯ ëª©ë¡
+    public List<GameObject> FieldSlots; // í•„ë“œ ìŠ¬ë¡¯ ëª©ë¡
     protected override void Awake()
     {
         base.Awake();
-        playerCards = new List<GameObject>();
-        enemyCards = new List<GameObject>();
-        playerSlots = new List<GameObject>();
-        enemySlots = new List<GameObject>();
+        PlayerCards = new List<GameObject>();
+        EnemyCards = new List<GameObject>();
+        PlayerSlots = new List<GameObject>();
+        EnemySlots = new List<GameObject>();
         FieldSlots = new List<GameObject>();
     }
     void Start()
@@ -33,22 +33,22 @@ public class BattleManager : Singleton<BattleManager>
     }
     public void StartPlayerTurn()
     {
-        currentTurn = TurnState.PlayerTurn;
-        Debug.Log("ÇÃ·¹ÀÌ¾î ÅÏ ½ÃÀÛ");
-        // Ä«µå ¼±ÅÃ, ÀÔ·Â È°¼ºÈ­ µî
+        CurrentTurn = TurnState.PlayerTurn;
+        Debug.Log("í”Œë ˆì´ì–´ í„´ ì‹œì‘");
+        // ì¹´ë“œ ì„ íƒ, ì…ë ¥ í™œì„±í™” ë“±
     }
 
     public void EndPlayerTurn()
     {
-        Debug.Log("Àû ÅÏ ½ÃÀÛ");
+        Debug.Log("ì  í„´ ì‹œì‘");
         StartEnemyTurn();
     }
 
     public void StartEnemyTurn()
     {
-        currentTurn = TurnState.EnemyTurn;
-        // AI Çàµ¿ µî
-        //Invoke(nameof(EndEnemyTurn), 2f); // Àû ÅÏÀÌ ³¡³ª°í ÀÚµ¿À¸·Î ´ÙÀ½ ÅÏ
+        CurrentTurn = TurnState.EnemyTurn;
+        // AI í–‰ë™ ë“±
+        //Invoke(nameof(EndEnemyTurn), 2f); // ì  í„´ì´ ëë‚˜ê³  ìë™ìœ¼ë¡œ ë‹¤ìŒ í„´
     }
 
     public void EndEnemyTurn()

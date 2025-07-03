@@ -219,7 +219,7 @@ GameObject:
   - component: {fileID: 5729096049618426847}
   - component: {fileID: 2230933759300525784}
   m_Layer: 10
-  m_Name: Cancer
+  m_Name: Orion
   m_TagString: Card
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -308,7 +308,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerFace: {fileID: 4031067529533025051}
   _enemyFace: {fileID: 1306569542612047117}
-  _ability_Amount: 0
+  _ability_Amount: 1
 --- !u!114 &8431943449305290937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -322,11 +322,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _showCardStatus: {fileID: 5761765831626957857}
-  _top: 5
-  _bottom: 4
-  _left: 5
-  _right: 3
-  CardType: 0
+  _top: 7
+  _bottom: 8
+  _left: 4
+  _right: 6
+  CardType: 4
   Owner: 1
   CurrentSlot: {fileID: 0}
 --- !u!114 &5729096049618426847
