@@ -1,18 +1,18 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 public struct SlotLinks
 {
     public GameObject leftSlot;
     public GameObject rightSlot;
-    public GameObject upSlot;
-    public GameObject downSlot;
-    public SlotLinks(GameObject left, GameObject right, GameObject up, GameObject down)
+    public GameObject topSlot;
+    public GameObject bottomSlot;
+    public SlotLinks(GameObject left, GameObject right, GameObject top, GameObject bottom)
     {
         leftSlot = left;
         rightSlot = right;
-        upSlot = up;
-        downSlot = down;
+        topSlot = top;
+        bottomSlot = bottom;
     }
 }
 public class SlotInfo : MonoBehaviour
@@ -23,12 +23,12 @@ public class SlotInfo : MonoBehaviour
     public SlotLinks LinkedSlots;
     [SerializeField] private GameObject _leftSlot;
     [SerializeField] private GameObject _rightSlot;
-    [SerializeField] private GameObject _upSlot;
-    [SerializeField] private GameObject _downSlot;
+    [SerializeField] private GameObject _topSlot;
+    [SerializeField] private GameObject _bottomSlot;
 
     private void Awake()
     {
-        LinkedSlots = new SlotLinks(_leftSlot, _rightSlot, _upSlot, _downSlot);
+        LinkedSlots = new SlotLinks(_leftSlot, _rightSlot, _topSlot, _bottomSlot);
     }
     private void OnEnable()
     {

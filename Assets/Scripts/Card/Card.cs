@@ -107,34 +107,34 @@ public class Card : MonoBehaviour
         }
 
 
-        if (_cardStatus?.CurrentSlot?.GetComponent<SlotInfo>()?.LinkedSlots.upSlot != null
-            && _cardStatus?.CurrentSlot?.GetComponent<SlotInfo>()?.LinkedSlots.upSlot?.GetComponent<SlotInfo>()?.OccupiedCard != null 
-            && _cardStatus?.CurrentSlot?.GetComponent<SlotInfo>()?.LinkedSlots.upSlot?.GetComponent<SlotInfo>()?.OccupiedCard.GetComponent<CardStatus>()?.Stats.Bottom != null)
+        if (_cardStatus?.CurrentSlot?.GetComponent<SlotInfo>()?.LinkedSlots.topSlot != null
+            && _cardStatus?.CurrentSlot?.GetComponent<SlotInfo>()?.LinkedSlots.topSlot?.GetComponent<SlotInfo>()?.OccupiedCard != null 
+            && _cardStatus?.CurrentSlot?.GetComponent<SlotInfo>()?.LinkedSlots.topSlot?.GetComponent<SlotInfo>()?.OccupiedCard.GetComponent<CardStatus>()?.Stats.Bottom != null)
         {
             Debug.Log("위쪽 슬롯이 존재합니다.");
-            if (_cardStatus.CurrentSlot.GetComponent<SlotInfo>().LinkedSlots.upSlot.GetComponent<SlotInfo>().OccupiedCard?.GetComponent<CardStatus>().Owner
+            if (_cardStatus.CurrentSlot.GetComponent<SlotInfo>().LinkedSlots.topSlot.GetComponent<SlotInfo>().OccupiedCard?.GetComponent<CardStatus>().Owner
                 != _cardStatus.Owner)
             {
-                if (_cardStatus.CurrentSlot.GetComponent<SlotInfo>().LinkedSlots.upSlot.GetComponent<SlotInfo>()?.OccupiedCard.GetComponent<CardStatus>()?.Stats.Bottom
+                if (_cardStatus.CurrentSlot.GetComponent<SlotInfo>().LinkedSlots.topSlot.GetComponent<SlotInfo>()?.OccupiedCard.GetComponent<CardStatus>()?.Stats.Bottom
                     < _cardStatus.Stats.Top)
                 {
-                    _cardStatus.CurrentSlot.GetComponent<SlotInfo>().LinkedSlots.upSlot.GetComponent<SlotInfo>()?.OccupiedCard.GetComponent<Card>().FlipCard();
+                    _cardStatus.CurrentSlot.GetComponent<SlotInfo>().LinkedSlots.topSlot.GetComponent<SlotInfo>()?.OccupiedCard.GetComponent<Card>().FlipCard();
                 }
             }
         }
 
-        if (_cardStatus?.CurrentSlot?.GetComponent<SlotInfo>()?.LinkedSlots.downSlot != null
-            && _cardStatus?.CurrentSlot?.GetComponent<SlotInfo>()?.LinkedSlots.downSlot?.GetComponent<SlotInfo>()?.OccupiedCard != null
-            && _cardStatus?.CurrentSlot?.GetComponent<SlotInfo>()?.LinkedSlots.downSlot?.GetComponent<SlotInfo>()?.OccupiedCard.GetComponent<CardStatus>()?.Stats.Top != null)
+        if (_cardStatus?.CurrentSlot?.GetComponent<SlotInfo>()?.LinkedSlots.bottomSlot != null
+            && _cardStatus?.CurrentSlot?.GetComponent<SlotInfo>()?.LinkedSlots.bottomSlot?.GetComponent<SlotInfo>()?.OccupiedCard != null
+            && _cardStatus?.CurrentSlot?.GetComponent<SlotInfo>()?.LinkedSlots.bottomSlot?.GetComponent<SlotInfo>()?.OccupiedCard.GetComponent<CardStatus>()?.Stats.Top != null)
         {
             Debug.Log("아래쪽 슬롯이 존재합니다.");
-            if (_cardStatus.CurrentSlot.GetComponent<SlotInfo>().LinkedSlots.downSlot.GetComponent<SlotInfo>().OccupiedCard?.GetComponent<CardStatus>().Owner
+            if (_cardStatus.CurrentSlot.GetComponent<SlotInfo>().LinkedSlots.bottomSlot.GetComponent<SlotInfo>().OccupiedCard?.GetComponent<CardStatus>().Owner
                 != _cardStatus.Owner)
             {
-                if (_cardStatus.CurrentSlot.GetComponent<SlotInfo>().LinkedSlots.downSlot.GetComponent<SlotInfo>()?.OccupiedCard.GetComponent<CardStatus>().Stats.Top
+                if (_cardStatus.CurrentSlot.GetComponent<SlotInfo>().LinkedSlots.bottomSlot.GetComponent<SlotInfo>()?.OccupiedCard.GetComponent<CardStatus>().Stats.Top
                     < _cardStatus.Stats.Bottom)
                 {
-                    _cardStatus.CurrentSlot.GetComponent<SlotInfo>().LinkedSlots.downSlot.GetComponent<SlotInfo>()?.OccupiedCard.GetComponent<Card>().FlipCard();
+                    _cardStatus.CurrentSlot.GetComponent<SlotInfo>().LinkedSlots.bottomSlot.GetComponent<SlotInfo>()?.OccupiedCard.GetComponent<Card>().FlipCard();
                 }
             }
         }
