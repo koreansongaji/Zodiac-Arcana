@@ -21,13 +21,7 @@ public class SetPositionCard : MonoBehaviour
     }
     private void OnEnable()
     {
-        if(GetAroundSlot() != null)
-        {
-            _currentSlot = GetAroundSlot().gameObject;
-            _cardStatus.CurrentSlot = _currentSlot;
-            SetPositionCardAroundSlot(_currentSlot);
-            SetOccupiedCard();
-        }
+        SetDropCard();
     }
     // Start is called before the first frame update
     void Start()
@@ -43,7 +37,18 @@ public class SetPositionCard : MonoBehaviour
 
     public void SetDropCard()
     {
-        _currentSlot = GetAroundSlot().gameObject;
+        // 방어적 초기화
+        if (_cardStatus == null) _cardStatus = GetComponent<CardStatus>();
+        if (_card == null) _card = GetComponent<Card>();
+
+        Collider2D slotCollider = GetAroundSlot();
+        if (slotCollider == null)
+        {
+            Debug.LogWarning($"{name}: 주변에 슬롯이 없음! SetDropCard 실패");
+            return;
+        }
+
+        _currentSlot = slotCollider.gameObject;
         _cardStatus.CurrentSlot = _currentSlot;
         SetPositionCardAroundSlot(_currentSlot);
         SetOccupiedCard();

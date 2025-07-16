@@ -29,7 +29,7 @@ public class DragCard : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetMouseButton(0) && !_isMouseClickCoolDown
+        if (Input.GetMouseButtonDown(0) && !_isMouseClickCoolDown
             && (BattleManager.Instance.CurrentTurn == TurnState.PlayerTurn)) //좌클릭
         {
             if (CurSelectedCard != null) //내려 놓기
