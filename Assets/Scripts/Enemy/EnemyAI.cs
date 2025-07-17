@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
+    [SerializeField] int Stage;
+
     [SerializeField] private List<GameObject> _enemyCards;
     [SerializeField] private List<GameObject> _enemyHandSlots;
     public List<GameObject> EnemyHandCards; // List of enemy cards
@@ -12,6 +14,7 @@ public class EnemyAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
     }
     private void OnEnable()
     {

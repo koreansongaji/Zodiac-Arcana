@@ -40,7 +40,7 @@ public class Card : MonoBehaviour
     }
     private void AddCardToManager()
     {
-        if (gameObject.layer == LayerMask.NameToLayer("PlayerCard"))
+        if (gameObject.GetComponent<CardStatus>().Owner == CardOwner.Player)
         {
             if (!BattleManager.Instance.PlayerCards.Contains(gameObject))
             {
@@ -51,7 +51,7 @@ public class Card : MonoBehaviour
                 BattleManager.Instance.EnemyCards.Remove(gameObject);
             }
         }
-        else if (gameObject.layer == LayerMask.NameToLayer("EnemyCard"))
+        else if (gameObject.GetComponent<CardStatus>().Owner == CardOwner.Enemy)
         {
             if (!BattleManager.Instance.EnemyCards.Contains(gameObject))
             {
