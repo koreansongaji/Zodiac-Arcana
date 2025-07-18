@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c151d39d210fde941a7c2bb63595bd88, type: 3}
-  m_Name: Cancer
+  m_Name: Cetus
   m_EditorClassIdentifier: 
-  cardName: Cancer
-  top: 0
-  bottom: 0
-  left: 0
-  right: 0
+  cardName: Cetus
+  left: 6
+  top: 5
+  right: 6
+  bottom: 7
   type: 0
-  flipCountWeight: 0
-  earlyTurnStandard: 0
-  earlyTurnPenalty: 0
-  surroundingCardBase: 0
+  flipCountWeight: 10
+  earlyTurnStandard: 1
+  earlyTurnPenalty: 1
+  surroundingCardBase: 6

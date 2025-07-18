@@ -28,28 +28,27 @@ public enum CardType
 [RequireComponent(typeof(SetPositionCard))]
 public class CardStatus : MonoBehaviour
 {
+    [SerializeField] public CardData CardData;
     [SerializeField] private ShowCardStatus _showCardStatus;
 
     private Card _card;
     private SetPositionCard _setPositionCard;
 
-    public CardStats Stats;
-    [SerializeField] private int _top;
-    [SerializeField] private int _bottom;
-    [SerializeField] private int _left;
-    [SerializeField] private int _right;
+    public CardStats Stats = new CardStats();
 
     public CardType CardType = CardType.Normal;
 
     public CardOwner Owner;
 
     public GameObject CurrentSlot;
+
+    [HideInInspector] public int surroundingCard = 0;
     private void Awake()
     {
-        Stats.Top = _top;
-        Stats.Bottom = _bottom;
-        Stats.Left = _left;
-        Stats.Right = _right;
+        Stats.Top = CardData.Top;
+        Stats.Bottom = CardData.Bottom;
+        Stats.Left = CardData.Left;
+        Stats.Right = CardData.Right;
 
         _card = GetComponent<Card>();
         _setPositionCard = GetComponent<SetPositionCard>();

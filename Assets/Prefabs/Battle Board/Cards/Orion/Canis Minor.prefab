@@ -321,14 +321,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 132e8c25d588b0346b5e39c203d20834, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CardData: {fileID: 11400000, guid: d05823c0e47a12048a111042ea37024b, type: 2}
   _showCardStatus: {fileID: 5761765831626957857}
-  _top: 3
-  _bottom: 3
-  _left: 5
-  _right: 4
   CardType: 4
   Owner: 1
   CurrentSlot: {fileID: 0}
+  surroundingCard: 0
 --- !u!114 &5729096049618426847
 MonoBehaviour:
   m_ObjectHideFlags: 0

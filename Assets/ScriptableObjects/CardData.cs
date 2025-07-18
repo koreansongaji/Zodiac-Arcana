@@ -11,17 +11,17 @@ public class CardData : ScriptableObject
 
     [Header("Card Stats")]
     [SerializeField]
-    private int top;
-    public int Top { get { return top; } }
-    [SerializeField]
-    private int bottom;
-    public int Bottom { get { return bottom; } }
-    [SerializeField]
     private int left;
     public int Left { get { return left; } }
     [SerializeField]
+    private int top;
+    public int Top { get { return top; } }
+    [SerializeField]
     private int right;
     public int Right { get { return right; } }
+    [SerializeField]
+    private int bottom;
+    public int Bottom { get { return bottom; } }
     [SerializeField]
     private CardType type;
     public CardType Type { get { return type; } }

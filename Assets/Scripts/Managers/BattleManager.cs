@@ -7,6 +7,8 @@ public enum TurnState { PlayerTurn, EnemyTurn }
 public class BattleManager : Singleton<BattleManager>
 {
     public TurnState CurrentTurn { get; private set; } //읽기만 가능
+    public int Stage; // 현재 스테이지 번호
+    public int Round;
 
     public List<GameObject> PlayerCards; // 플레이어 카드 목록
     public List<GameObject> EnemyCards; // 적 카드 목록
@@ -21,6 +23,8 @@ public class BattleManager : Singleton<BattleManager>
         PlayerSlots = new List<GameObject>();
         EnemySlots = new List<GameObject>();
         FieldSlots = new List<GameObject>();
+        Round = 0;
+        Stage = 0;
     }
     void Start()
     {
@@ -53,6 +57,18 @@ public class BattleManager : Singleton<BattleManager>
 
     public void EndEnemyTurn()
     {
+        StartPlayerTurn();
+    }
+    public void StartStage(int stage)
+    {
+        Stage = stage;
+        Round = 0;
+        PlayerCards.Clear();
+        EnemyCards.Clear();
+        PlayerSlots.Clear();
+        EnemySlots.Clear();
+        FieldSlots.Clear();
+        Debug.Log($"스테이지 {Stage} 시작");
         StartPlayerTurn();
     }
 }
