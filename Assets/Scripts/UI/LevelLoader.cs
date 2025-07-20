@@ -17,6 +17,8 @@ public class LevelLoader : MonoBehaviour
         //_transition.Play("Crossfade_Start");
        
     }*/
+
+
     public void LoadNextLevel() => StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
     public void QuitGame()
     {
@@ -27,7 +29,7 @@ public class LevelLoader : MonoBehaviour
     {
         Debug.Log("Starting transition");
         _transition.SetTrigger("Start");
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(_transitionTime);
         Debug.Log("Loading Scene");
         SceneManager.LoadScene(levelIndex);
     }
