@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Rendering;
 public class CardEnlargement : MonoBehaviour
 {
-    [SerializeField] private float _scale = 2f;
+    [SerializeField] private float _scale = 1.1f;
     [SerializeField] private float _enlargeTime = 0.2f;
     private Material _outlineShader;
     private Vector3 _targetScale;
