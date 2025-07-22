@@ -2363,6 +2363,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3362562860805546448, guid: b03fd8f064f5ee84da66554a35851c72,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1704078788}
+    - target: {fileID: 3362562860805546448, guid: b03fd8f064f5ee84da66554a35851c72,
+        type: 3}
+      propertyPath: m_VertexColorAlwaysGammaSpace
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7939778933700550002, guid: b03fd8f064f5ee84da66554a35851c72,
         type: 3}
       propertyPath: m_Name
