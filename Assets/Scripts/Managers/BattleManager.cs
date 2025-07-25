@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum TurnState { PlayerTurn, EnemyTurn }
 
@@ -15,6 +16,9 @@ public class BattleManager : Singleton<BattleManager>
     public List<GameObject> PlayerSlots; // 플레이어 슬롯 목록
     public List<GameObject> EnemySlots; // 적 슬롯 목록
     public List<GameObject> FieldSlots; // 필드 슬롯 목록
+
+    public CardStats PlayerTeamBuff = new CardStats(); // 플레이어 팀 버프
+    public CardStats EnemyTeamBuff = new CardStats(); // 적 팀 버프
     protected override void Awake()
     {
         base.Awake();
@@ -25,6 +29,8 @@ public class BattleManager : Singleton<BattleManager>
         FieldSlots = new List<GameObject>();
         Round = 0;
         Stage = 0;
+        PlayerTeamBuff = new CardStats(0, 0, 0, 0);
+        EnemyTeamBuff = new CardStats(0, 0, 0, 0);
     }
     void Start()
     {
@@ -37,20 +43,23 @@ public class BattleManager : Singleton<BattleManager>
     }
     public void StartPlayerTurn()
     {
+        StartTurn();
         CurrentTurn = TurnState.PlayerTurn;
-        Debug.Log("플레이어 턴 시작");
+        //Debug.Log("플레이어 턴 시작");
         // 카드 선택, 입력 활성화 등
     }
 
     public void EndPlayerTurn()
     {
-        Debug.Log("적 턴 시작");
+        //Debug.Log("적 턴 시작");
         StartEnemyTurn();
     }
 
     public void StartEnemyTurn()
     {
+        StartTurn();
         CurrentTurn = TurnState.EnemyTurn;
+
         // AI 행동 등
         //Invoke(nameof(EndEnemyTurn), 2f); // 적 턴이 끝나고 자동으로 다음 턴
     }
@@ -68,7 +77,47 @@ public class BattleManager : Singleton<BattleManager>
         PlayerSlots.Clear();
         EnemySlots.Clear();
         FieldSlots.Clear();
-        Debug.Log($"스테이지 {Stage} 시작");
+        //Debug.Log($"스테이지 {Stage} 시작");
         StartPlayerTurn();
     }
+    public void StartTurn()
+    {
+        //Debug.Log($"턴 시작: {CurrentTurn}");
+        PlayerTeamBuff = new CardStats(0, 0, 0, 0);
+        EnemyTeamBuff = new CardStats(0, 0, 0, 0);
+        foreach (var card in PlayerCards)
+        {
+            if((LayerMask.GetMask("FieldCardSlot") & (1<<card.GetComponent<CardStatus>().CurrentSlot.layer)) != 0)
+            {
+                //Debug.Log($"카드 {card.name}의 능력 사용");
+                card.GetComponent<Card>().UseSkill();
+            }
+        }
+        foreach (var card in EnemyCards)
+        {
+            if ((LayerMask.GetMask("FieldCardSlot") & (1 << card.GetComponent<CardStatus>().CurrentSlot.layer)) != 0)
+            {
+                //Debug.Log($"적 카드 {card.name}의 능력 사용");
+                card.GetComponent<Card>().UseSkill();
+            }
+        }
+
+        foreach (var card in PlayerCards)
+        {
+            if ((LayerMask.GetMask("FieldCardSlot") & (1 << card.GetComponent<CardStatus>().CurrentSlot.layer)) != 0)
+            {
+                //Debug.Log($"플레이어 카드 {card.name}의 능력 사용");
+                card.GetComponent<CardStatus>().ChangeStatus(PlayerTeamBuff);
+            }
+        }
+        foreach (var card in EnemyCards)
+        {
+            if ((LayerMask.GetMask("FieldCardSlot") & (1 << card.GetComponent<CardStatus>().CurrentSlot.layer)) != 0)
+            {
+                //Debug.Log($"적 카드 {card.name}의 능력 사용");
+                card.GetComponent<CardStatus>().ChangeStatus(EnemyTeamBuff);
+            }
+        }
+    }
+ 
 }

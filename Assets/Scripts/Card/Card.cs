@@ -19,6 +19,7 @@ public class Card : MonoBehaviour
     {
         _cardStatus = GetComponent<CardStatus>();
         _setPositionCard = GetComponent<SetPositionCard>();
+        TryGetComponent<TeamBuff>(out _teamBuff);
     }
     // Start is called before the first frame update
     void Start()
@@ -83,19 +84,20 @@ public class Card : MonoBehaviour
     /// 근처 카드와 비교하는 메서드입니다.
     /// </summary>
     public void CompareWithAdjacentCards()
-    {   if(_cardStatus?.CurrentSlot?.GetComponent<SlotInfo>()?.LinkedSlots.leftSlot != null
+    {   
+        if(_cardStatus?.CurrentSlot?.GetComponent<SlotInfo>()?.LinkedSlots.leftSlot != null
             && _cardStatus?.CurrentSlot?.GetComponent<SlotInfo>()?.LinkedSlots.leftSlot?.GetComponent<SlotInfo>()?.OccupiedCard != null 
             && _cardStatus?.CurrentSlot?.GetComponent<SlotInfo>()?.LinkedSlots.leftSlot?.GetComponent<SlotInfo>()?.OccupiedCard.GetComponent<CardStatus>()?.Stats.Right != null)
         {
-            Debug.Log("왼쪽 슬롯이 존재합니다.");
+            //Debug.Log("왼쪽 슬롯이 존재합니다.");
             if (_cardStatus.CurrentSlot.GetComponent<SlotInfo>().LinkedSlots.leftSlot.GetComponent<SlotInfo>().OccupiedCard.GetComponent<CardStatus>().Owner
                 != _cardStatus.Owner)
             {
-                Debug.Log("왼쪽 슬롯의 카드와 비교합니다.");
+                //Debug.Log("왼쪽 슬롯의 카드와 비교합니다.");
                 if (_cardStatus.CurrentSlot.GetComponent<SlotInfo>().LinkedSlots.leftSlot.GetComponent<SlotInfo>()?.OccupiedCard.GetComponent<CardStatus>().Stats.Right
                     < _cardStatus.Stats.Left)
                 {
-                    Debug.Log("왼쪽 카드가 현재 카드보다 작습니다. 왼쪽 카드를 뒤집습니다.");
+                    //Debug.Log("왼쪽 카드가 현재 카드보다 작습니다. 왼쪽 카드를 뒤집습니다.");
                     _cardStatus.CurrentSlot.GetComponent<SlotInfo>().LinkedSlots.leftSlot.GetComponent<SlotInfo>()?.OccupiedCard.GetComponent<Card>().FlipCard();
                 }
             }
@@ -105,7 +107,7 @@ public class Card : MonoBehaviour
             && _cardStatus?.CurrentSlot?.GetComponent<SlotInfo>()?.LinkedSlots.rightSlot?.GetComponent<SlotInfo>()?.OccupiedCard != null
             && _cardStatus?.CurrentSlot?.GetComponent<SlotInfo>()?.LinkedSlots.rightSlot?.GetComponent<SlotInfo>()?.OccupiedCard.GetComponent<CardStatus>()?.Stats.Left != null)
         {
-            Debug.Log("오른쪽 슬롯이 존재합니다.");
+            //Debug.Log("오른쪽 슬롯이 존재합니다.");
             if (_cardStatus.CurrentSlot.GetComponent<SlotInfo>().LinkedSlots.rightSlot.GetComponent<SlotInfo>().OccupiedCard.GetComponent<CardStatus>().Owner
                 != _cardStatus.Owner)
             {
@@ -122,7 +124,7 @@ public class Card : MonoBehaviour
             && _cardStatus?.CurrentSlot?.GetComponent<SlotInfo>()?.LinkedSlots.topSlot?.GetComponent<SlotInfo>()?.OccupiedCard != null 
             && _cardStatus?.CurrentSlot?.GetComponent<SlotInfo>()?.LinkedSlots.topSlot?.GetComponent<SlotInfo>()?.OccupiedCard.GetComponent<CardStatus>()?.Stats.Bottom != null)
         {
-            Debug.Log("위쪽 슬롯이 존재합니다.");
+            //Debug.Log("위쪽 슬롯이 존재합니다.");
             if (_cardStatus.CurrentSlot.GetComponent<SlotInfo>().LinkedSlots.topSlot.GetComponent<SlotInfo>().OccupiedCard?.GetComponent<CardStatus>().Owner
                 != _cardStatus.Owner)
             {
@@ -138,7 +140,7 @@ public class Card : MonoBehaviour
             && _cardStatus?.CurrentSlot?.GetComponent<SlotInfo>()?.LinkedSlots.bottomSlot?.GetComponent<SlotInfo>()?.OccupiedCard != null
             && _cardStatus?.CurrentSlot?.GetComponent<SlotInfo>()?.LinkedSlots.bottomSlot?.GetComponent<SlotInfo>()?.OccupiedCard.GetComponent<CardStatus>()?.Stats.Top != null)
         {
-            Debug.Log("아래쪽 슬롯이 존재합니다.");
+            //Debug.Log("아래쪽 슬롯이 존재합니다.");
             if (_cardStatus.CurrentSlot.GetComponent<SlotInfo>().LinkedSlots.bottomSlot.GetComponent<SlotInfo>().OccupiedCard?.GetComponent<CardStatus>().Owner
                 != _cardStatus.Owner)
             {
@@ -152,9 +154,9 @@ public class Card : MonoBehaviour
         UseSkill();
         // 인접 카드 비교 로직 구현
         // 예: 현재 카드와 인접한 카드의 상태를 비교하여 게임 로직 처리
-        Debug.Log("인접 카드와 비교 중입니다.");
+        //Debug.Log("인접 카드와 비교 중입니다.");
     }
-    private void UseSkill()
+    public void UseSkill()
     {
         if(_cardStatus.CardType == CardType.Normal)
         {
@@ -162,34 +164,15 @@ public class Card : MonoBehaviour
         }
         else if(_cardStatus.CardType == CardType.TeamBuff)
         {
+            // 팀 버프 스킬 사용 로직
+            //Debug.Log("팀 버프 스킬 사용 중입니다.");
             if (_teamBuff == null)
             {
-                _teamBuff = GetComponent<TeamBuff>();
+                TryGetComponent<TeamBuff>(out _teamBuff);
             }
             if (_teamBuff != null)
             {
-                if(_cardStatus.Owner == CardOwner.Player)
-                {
-                    List<GameObject> teamCards = BattleManager.Instance.PlayerCards;
-
-                    if (teamCards == null || teamCards.Count == 0)
-                    {
-                        return;
-                    }
-
-                    _teamBuff.ApplyBuffToTeam(teamCards, _ability_Amount);
-                }
-                else if (_cardStatus.Owner == CardOwner.Enemy)
-                {
-                    List<GameObject> teamCards = BattleManager.Instance.EnemyCards;
-
-                    if (teamCards == null || teamCards.Count == 0)
-                    {
-                        return;
-                    }
-
-                    _teamBuff.ApplyBuffToTeam(teamCards, _ability_Amount);
-                }
+                _teamBuff.ApplyBuffToTeam(_cardStatus.Owner, _ability_Amount);
             }
         }
     }
@@ -213,6 +196,6 @@ public class Card : MonoBehaviour
         AddCardToManager();
         // 카드 플립 로직 구현
         // 예: 카드의 회전 애니메이션, 상태 변경 등
-        Debug.Log("카드가 뒤집혔습니다.");
+        //Debug.Log("카드가 뒤집혔습니다.");
     }
 }

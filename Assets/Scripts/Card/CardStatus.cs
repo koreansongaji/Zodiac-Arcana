@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public struct CardStats
@@ -9,6 +10,13 @@ public struct CardStats
     public int Bottom;
     public int Left;
     public int Right;
+    public CardStats(int top, int bottom, int left, int right)
+    {
+        Top = top;
+        Bottom = bottom;
+        Left = left;
+        Right = right;
+    }
 }
 public enum CardOwner
 {
@@ -45,21 +53,20 @@ public class CardStatus : MonoBehaviour
     [HideInInspector] public int surroundingCard = 0;
     private void Awake()
     {
-        Stats.Top = CardData.Top;
-        Stats.Bottom = CardData.Bottom;
-        Stats.Left = CardData.Left;
-        Stats.Right = CardData.Right;
+        Stats = new CardStats(CardData.Top, CardData.Bottom, CardData.Left, CardData.Right);
 
         _card = GetComponent<Card>();
         _setPositionCard = GetComponent<SetPositionCard>();
     }
-
-    public void ChangeStatus(int amount)
+    
+    public void ChangeStatus(CardStats buffAmount)
     {
-        Stats.Top += amount;
-        Stats.Bottom += amount;
-        Stats.Left += amount;
-        Stats.Right += amount;
+        //Debug.Log($"Changing status for card: {gameObject.name} with buff amount: {buffAmount.Top}, {buffAmount.Bottom}, {buffAmount.Left}, {buffAmount.Right}");
+        Stats.Top = CardData.Top + buffAmount.Top;
+        Stats.Bottom = CardData.Bottom + buffAmount.Bottom;
+        Stats.Left = CardData.Left + buffAmount.Left;
+        Stats.Right = CardData.Right + buffAmount.Right;
+
         // Update the card's visual representation if needed
         // For example, update a UI element or sprite to reflect the new stats
         _showCardStatus?.UpdateShowStatuse();

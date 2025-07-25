@@ -7,6 +7,7 @@ public class TeamBuff : MonoBehaviour
     private CardStatus _cardStatus;
     private void Awake()
     {
+
     }
     // Start is called before the first frame update
     void Start()
@@ -19,16 +20,22 @@ public class TeamBuff : MonoBehaviour
     {
         
     }
-    public void ApplyBuffToTeam(List<GameObject> teamCards, int buffAmount)
+    public void ApplyBuffToTeam(CardOwner owner, int buffAmount)
     {
-        foreach (GameObject card in teamCards)
+        //Debug.Log($"Applying buff of {buffAmount} to team of {owner}");
+        if (owner == CardOwner.Player)
         {
-            CardStatus cardStatus = card.GetComponent<CardStatus>();
-            if (cardStatus != null)
-            {
-                cardStatus.ChangeStatus((int)buffAmount);
-                Debug.Log($"Buff applied to {card.name}: Up={cardStatus.Stats.Top}, Down={cardStatus.Stats.Bottom}, Left={cardStatus.Stats.Left}, Right={cardStatus.Stats.Right}");
-            }
+            BattleManager.Instance.PlayerTeamBuff.Top += buffAmount;
+            BattleManager.Instance.PlayerTeamBuff.Bottom += buffAmount;
+            BattleManager.Instance.PlayerTeamBuff.Left += buffAmount;
+            BattleManager.Instance.PlayerTeamBuff.Right += buffAmount;
+        }
+        else if (owner == CardOwner.Enemy)
+        {
+            BattleManager.Instance.EnemyTeamBuff.Top += buffAmount;
+            BattleManager.Instance.EnemyTeamBuff.Bottom += buffAmount;
+            BattleManager.Instance.EnemyTeamBuff.Left += buffAmount;
+            BattleManager.Instance.EnemyTeamBuff.Right += buffAmount;
         }
     }
 }

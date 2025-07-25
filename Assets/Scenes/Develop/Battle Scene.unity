@@ -1253,6 +1253,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3362562860805546448, guid: 8cfb62f3ff18d7041abbdf23bfbc032a,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1704078788}
+    - target: {fileID: 3362562860805546448, guid: 8cfb62f3ff18d7041abbdf23bfbc032a,
+        type: 3}
+      propertyPath: m_VertexColorAlwaysGammaSpace
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7939778933700550002, guid: 8cfb62f3ff18d7041abbdf23bfbc032a,
         type: 3}
       propertyPath: m_Name
@@ -1521,6 +1531,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 539093430}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &443071528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 104391419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f14c6bd262522945b627f82809ba93f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &487926085
 GameObject:
   m_ObjectHideFlags: 0
@@ -1959,15 +1981,44 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3282448344995951221, guid: 60f2f6ffa98c05f49b58b7d94ecd9b0e,
+        type: 3}
+      propertyPath: _ability_Amount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3362562860805546448, guid: 60f2f6ffa98c05f49b58b7d94ecd9b0e,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1704078788}
+    - target: {fileID: 3362562860805546448, guid: 60f2f6ffa98c05f49b58b7d94ecd9b0e,
+        type: 3}
+      propertyPath: m_VertexColorAlwaysGammaSpace
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7939778933700550002, guid: 60f2f6ffa98c05f49b58b7d94ecd9b0e,
         type: 3}
       propertyPath: m_Name
       value: Taurus
       objectReference: {fileID: 0}
+    - target: {fileID: 8431943449305290937, guid: 60f2f6ffa98c05f49b58b7d94ecd9b0e,
+        type: 3}
+      propertyPath: CardType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8647391779420086435, guid: 60f2f6ffa98c05f49b58b7d94ecd9b0e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7939778933700550002, guid: 60f2f6ffa98c05f49b58b7d94ecd9b0e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 443071528}
   m_SourcePrefab: {fileID: 100100000, guid: 60f2f6ffa98c05f49b58b7d94ecd9b0e, type: 3}
 --- !u!1001 &552958190
 PrefabInstance:
@@ -5540,6 +5591,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3362562860805546448, guid: 6ef5a0a3fbd9ba44a91291a83190e180,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1704078788}
+    - target: {fileID: 3362562860805546448, guid: 6ef5a0a3fbd9ba44a91291a83190e180,
+        type: 3}
+      propertyPath: m_VertexColorAlwaysGammaSpace
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7939778933700550002, guid: 6ef5a0a3fbd9ba44a91291a83190e180,
         type: 3}
