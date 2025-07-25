@@ -166,6 +166,7 @@ namespace SimpleAudioManager
         /// </summary>
         private void Awake()
         {
+            DontDestroyOnLoad(gameObject);
             _instance = _instance ?? this;
             if (_instance != this)
             {

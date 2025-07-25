@@ -1,15 +1,14 @@
+using SimpleAudioManager;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LevelLoader : MonoBehaviour
 {
     [SerializeField] private Animator _transition;
-    [SerializeField] private float _transitionTime = 5.0f;
-
+    [SerializeField] private float _transitionTime = 0.1f;
     /*private void Update()
     {
         //if (Input.GetMouseButtonDown(0))
@@ -18,7 +17,6 @@ public class LevelLoader : MonoBehaviour
        
     }*/
 
-
     public void LoadNextLevel() => StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
 
     public void LoadSetLevel(int levelIndex) => StartCoroutine(LoadLevel(levelIndex));
@@ -26,6 +24,36 @@ public class LevelLoader : MonoBehaviour
     {
         Debug.Log("Quit");
         Application.Quit();
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        
+        SetMusic(scene.name);
+    }
+    private readonly Dictionary<string, (int sondID, int intensity)> _sceneMusic = new Dictionary<string, (int sondID, int intensity)>
+    {
+        {"Title Scene", (0,0)},
+        {"Level Select", (0,1)}
+    };
+    private void SetMusic(string sceneName)
+    {
+        if (_sceneMusic.TryGetValue(sceneName, out var setting))
+        {
+            Manager.instance.PlaySong(setting.sondID);
+            Manager.instance.SetIntensity(setting.intensity);
+            Debug.Log("Scene Loaded: " + sceneName + "("+ setting.sondID + ", " + setting.intensity+")");
+        }
     }
     private IEnumerator LoadLevel(int levelIndex)
     {
