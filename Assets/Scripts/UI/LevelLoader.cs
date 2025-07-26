@@ -41,7 +41,7 @@ public class LevelLoader : MonoBehaviour
         
         SetMusic(scene.name);
     }
-    private readonly Dictionary<string, (int sondID, int intensity)> _sceneMusic = new Dictionary<string, (int sondID, int intensity)>
+    private readonly Dictionary<string, (int songID, int intensity)> _sceneMusic = new Dictionary<string, (int sondID, int intensity)>
     {
         {"Title Scene", (0,0)},
         {"Level Select", (0,1)}
@@ -50,9 +50,10 @@ public class LevelLoader : MonoBehaviour
     {
         if (_sceneMusic.TryGetValue(sceneName, out var setting))
         {
-            Manager.instance.PlaySong(setting.sondID);
+            if(Manager.instance.getSongID() != setting.songID)
+                Manager.instance.PlaySong(setting.songID);
             Manager.instance.SetIntensity(setting.intensity);
-            Debug.Log("Scene Loaded: " + sceneName + "("+ setting.sondID + ", " + setting.intensity+")");
+            Debug.Log("Scene Loaded: " + sceneName + "("+ setting.songID + ", " + setting.intensity+")");
         }
     }
     private IEnumerator LoadLevel(int levelIndex)
