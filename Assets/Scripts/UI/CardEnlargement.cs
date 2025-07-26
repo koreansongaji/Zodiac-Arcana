@@ -14,8 +14,8 @@ public class CardEnlargement : MonoBehaviour
 
     public void Start()
     {
-        _targetScale = new Vector3(_scale, _scale, _scale);
         _originalScale = transform.localScale;
+        _targetScale = _originalScale * _scale;
         _outlineShader = GetComponent<Renderer>();
         _outlineShader.material = new Material(_outlineShader.sharedMaterial);
         _outlineShader.material.SetFloat("_Enabled", 0f);
