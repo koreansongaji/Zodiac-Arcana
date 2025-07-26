@@ -80,7 +80,10 @@ namespace SimpleAudioManager
                 });
             }
         }
-
+        public int getSongID()
+        {
+            return _currentSongIndex;
+        }
         /// <summary>
         /// Plays the specified song and attempts to match the current intensity
         /// </summary>
