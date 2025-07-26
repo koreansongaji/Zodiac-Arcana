@@ -10,13 +10,18 @@ public class BattleManager : Singleton<BattleManager>
     public TurnState CurrentTurn { get; private set; } //읽기만 가능
     public int Stage; // 현재 스테이지 번호
     public int Round;
+    public float PlayerTime = 31.0f;
+    public float EnemyTime  = 31.0f;
 
+    [Header("카드 정보")]
     public List<GameObject> PlayerCards; // 플레이어 카드 목록
     public List<GameObject> EnemyCards; // 적 카드 목록
     public List<GameObject> PlayerSlots; // 플레이어 슬롯 목록
     public List<GameObject> EnemySlots; // 적 슬롯 목록
     public List<GameObject> FieldSlots; // 필드 슬롯 목록
+    public BattleUI BattleUI; // 배틀 UI 스크립트
 
+    [Header("버프 정보")]
     public CardStats PlayerTeamBuff = new CardStats(); // 플레이어 팀 버프
     public CardStats EnemyTeamBuff = new CardStats(); // 적 팀 버프
     protected override void Awake()
@@ -31,12 +36,36 @@ public class BattleManager : Singleton<BattleManager>
         Stage = 0;
         PlayerTeamBuff = new CardStats(0, 0, 0, 0);
         EnemyTeamBuff = new CardStats(0, 0, 0, 0);
+        CurrentTurn = TurnState.EnemyTurn; // 초기 턴은 플레이어 턴
+        PlayerTime = 31.0f; // 플레이어 턴 시간
+        EnemyTime = 31.0f; // 적 턴 시간
     }
     void Start()
     {
         StartPlayerTurn();
     }
-
+    private void FixedUpdate()
+    {
+        if(CurrentTurn == TurnState.PlayerTurn)
+        {
+            PlayerTime -= Time.fixedDeltaTime;
+            if (PlayerTime <= 0)
+            {
+                PlayerTime = 0;
+                PlayerLose(); // 플레이어 턴 시간 초과 시
+            }
+        }
+        else if(CurrentTurn == TurnState.EnemyTurn)
+        {
+            EnemyTime -= Time.fixedDeltaTime;
+            if (EnemyTime <= 0)
+            {
+                EnemyTime = 0;
+                PlayerWin(); // 적 턴 시간 초과 시
+            }
+        }
+    }
+    
     private void GetInfo()
     {
 
@@ -118,6 +147,23 @@ public class BattleManager : Singleton<BattleManager>
                 card.GetComponent<CardStatus>().ChangeStatus(EnemyTeamBuff);
             }
         }
+
+        //--------------- 턴 시간 초기화 -----------------
+        if(CurrentTurn == TurnState.PlayerTurn)
+        {
+            PlayerTime = 31.0f; // 플레이어 턴 시간 초기화
+        }
+        else if(CurrentTurn == TurnState.EnemyTurn)
+        {
+            EnemyTime = 31.0f; // 적 턴 시간 초기화
+        }
     }
- 
+    public void PlayerWin()
+    {
+
+    }
+    public void PlayerLose()
+    {
+
+    }
 }
