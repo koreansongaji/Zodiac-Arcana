@@ -63,6 +63,10 @@ public class Card : MonoBehaviour
                 BattleManager.Instance.PlayerCards.Remove(gameObject);
             }
         }
+        if (BattleManager.Instance.BattleUI != null)
+        {
+            BattleManager.Instance.BattleUI.CardCount();
+        }
     }
     private void OnDisable()
     {

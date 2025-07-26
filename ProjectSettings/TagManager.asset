@@ -52,6 +52,9 @@ TagManager:
   - name: Card
     uniqueID: 1254752533
     locked: 0
+  - name: BattleUI
+    uniqueID: 1803919101
+    locked: 0
   - name: Selected
     uniqueID: 1120937281
     locked: 0
