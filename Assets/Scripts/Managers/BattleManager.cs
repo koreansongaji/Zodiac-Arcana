@@ -72,8 +72,8 @@ public class BattleManager : Singleton<BattleManager>
     }
     public void StartPlayerTurn()
     {
-        StartTurn();
         CurrentTurn = TurnState.PlayerTurn;
+        StartTurn();
         //Debug.Log("플레이어 턴 시작");
         // 카드 선택, 입력 활성화 등
     }
@@ -86,8 +86,8 @@ public class BattleManager : Singleton<BattleManager>
 
     public void StartEnemyTurn()
     {
-        StartTurn();
         CurrentTurn = TurnState.EnemyTurn;
+        StartTurn();
 
         // AI 행동 등
         //Invoke(nameof(EndEnemyTurn), 2f); // 적 턴이 끝나고 자동으로 다음 턴
@@ -157,6 +157,8 @@ public class BattleManager : Singleton<BattleManager>
         {
             EnemyTime = 31.0f; // 적 턴 시간 초기화
         }
+
+        BattleUI.ChangeTurnIndicator(CurrentTurn);
     }
     public void PlayerWin()
     {

@@ -1307,6 +1307,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6535700003521888820}
+  - component: {fileID: 5365630385181966066}
+  - component: {fileID: 3614934383178511446}
   m_Layer: 0
   m_Name: TurnIndicator
   m_TagString: Untagged
@@ -1323,7 +1325,7 @@ Transform:
   m_GameObject: {fileID: 3002753508550252991}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -68.208, y: -23.736, z: 44.997}
+  m_LocalPosition: {x: -515, y: 341, z: 44.997}
   m_LocalScale: {x: 99.836, y: 99.836, z: 99.836}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1331,6 +1333,41 @@ Transform:
   - {fileID: 7964974175969263762}
   m_Father: {fileID: 8240054000583389172}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5365630385181966066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3002753508550252991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dcbb2f2ed7ed47448946fb8a76cf495, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerTurnIndicator: {fileID: 8257017758406305200}
+  _enemyTurnIndicator: {fileID: 4994972616957901214}
+--- !u!95 &3614934383178511446
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3002753508550252991}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d32a4607f3031074f8375ce77696bb7a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3347421389922230536
 GameObject:
   m_ObjectHideFlags: 0
@@ -2316,7 +2353,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4994972616957901214}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.45069292}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2324,7 +2361,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 5.683203, y: 3.537748}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0.6, y: 0.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4428051053697741473
@@ -3664,7 +3701,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerTimeGauge: {fileID: 8455991275671173907}
   _enemyTimeGauge: {fileID: 8581906247846999150}
-  _turnIndicator: {fileID: 0}
+  _turnIndicator: {fileID: 3002753508550252991}
   _playerCardCount:
   - {fileID: 8720228048795867982}
   - {fileID: 7633648786456804849}
@@ -3676,6 +3713,7 @@ MonoBehaviour:
   - {fileID: 9124843999868985144}
   - {fileID: 6867028409986153375}
   - {fileID: 7959174325475218699}
+  _changeFillAmount: 3
 --- !u!223 &4631746995397359605
 Canvas:
   m_ObjectHideFlags: 0
@@ -5024,7 +5062,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8257017758406305200}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.45069292}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5032,7 +5070,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -4.316797, y: 3.537748}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0.6, y: 0.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3038342370915710720

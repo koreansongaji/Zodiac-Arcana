@@ -17,12 +17,11 @@ public class BattleUI : MonoBehaviour
     [SerializeField] private float _changeFillAmount = 5f; // 카드 카운트 변경 속도
     private void Awake()
     {
-        
+        BattleManager.Instance.BattleUI = this; // BattleManager에 BattleUI 할당
     }
     // Start is called before the first frame update
     void Start()
     {
-        BattleManager.Instance.BattleUI = this; // BattleManager에 BattleUI 할당
         CardCount(); // 초기 카드 카운트 설정
     }
 
@@ -66,5 +65,20 @@ public class BattleUI : MonoBehaviour
         }
 
         image.fillAmount = targetAmount; // 보정
+    }
+
+    public void ChangeTurnIndicator(TurnState turnState)
+    {
+        Debug.Log($"턴 상태 변경: {turnState}");
+        if (turnState == TurnState.PlayerTurn)
+        {
+            Debug.Log("플레이어 턴");
+            _turnIndicator.GetComponent<UI_TurnIndicator>().SetTurnIndicator(true);
+        }
+        else if(turnState == TurnState.EnemyTurn)
+        {
+            Debug.Log("적 턴");
+            _turnIndicator.GetComponent<UI_TurnIndicator>().SetTurnIndicator(false);
+        }
     }
 }
