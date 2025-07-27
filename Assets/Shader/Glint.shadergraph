@@ -1008,8 +1008,8 @@
     "m_ObjectId": "62d99fc78b3a48eab55c350638762480",
     "m_Title": "Rotation",
     "m_Position": {
-        "x": -1668.999755859375,
-        "y": -634.0
+        "x": -1669.599853515625,
+        "y": -634.39990234375
     }
 }
 
@@ -1679,10 +1679,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -442.0000305175781,
-            "y": -180.0,
-            "width": 126.00009155273438,
-            "height": 118.0
+            "x": -603.9999389648438,
+            "y": -26.40001106262207,
+            "width": 208.00006103515626,
+            "height": 301.5999755859375
         }
     },
     "m_Slots": [
@@ -1702,7 +1702,7 @@
         "plus"
     ],
     "m_Precision": 0,
-    "m_PreviewExpanded": false,
+    "m_PreviewExpanded": true,
     "m_DismissedVersion": 0,
     "m_PreviewMode": 0,
     "m_CustomColors": {
@@ -1789,10 +1789,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -136.00001525878907,
-            "y": -273.0000305175781,
-            "width": 208.00003051757813,
-            "height": 278.0000305175781
+            "x": -87.20001983642578,
+            "y": -268.0,
+            "width": 208.0,
+            "height": 277.5999755859375
         }
     },
     "m_Slots": [

@@ -9,13 +9,10 @@ public class LevelLoader : MonoBehaviour
 {
     [SerializeField] private Animator _transition;
     [SerializeField] private float _transitionTime = 0.1f;
-    /*private void Update()
-    {
-        //if (Input.GetMouseButtonDown(0))
-        //LoadNextLevel();
-        //_transition.Play("Crossfade_Start");
-       
-    }*/
+    [SerializeField] private GameObject _transition1;
+    [SerializeField] private GameObject _transition2;
+    [SerializeField] private GameObject _transition3;
+    [SerializeField] private GameObject _transition4;
 
     public void LoadNextLevel() => StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
 
