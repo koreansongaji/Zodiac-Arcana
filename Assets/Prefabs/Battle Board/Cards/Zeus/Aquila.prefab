@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8638104035652503436
 Transform:
   m_ObjectHideFlags: 0
@@ -94,6 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3530456550336416601}
   - component: {fileID: 4565432503472897519}
+  - component: {fileID: 1232113410590218804}
   m_Layer: 10
   m_Name: Player Face
   m_TagString: Untagged
@@ -136,7 +137,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: -876546973899608171, guid: 2e22ceb6b48766d46b06294f5c7ca173, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -168,6 +169,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1232113410590218804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4031067529533025051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ff804a013d8d5a4994b5f592834f952, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _duration: 1
 --- !u!1 &6091326588032440085
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,7 +320,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerFace: {fileID: 4031067529533025051}
   _enemyFace: {fileID: 1306569542612047117}
-  _ability_Amount: 1
+  Ability_Amount: 1
 --- !u!114 &8431943449305290937
 MonoBehaviour:
   m_ObjectHideFlags: 0

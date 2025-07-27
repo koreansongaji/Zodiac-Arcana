@@ -44,7 +44,12 @@ public class LevelLoader : MonoBehaviour
     private readonly Dictionary<string, (int songID, int intensity)> _sceneMusic = new Dictionary<string, (int sondID, int intensity)>
     {
         {"Title Scene", (0,0)},
-        {"Level Select", (0,1)}
+        {"Level Select", (0,1)},
+        {"Stage 1", (1,0)},
+        {"Stage 2", (1,0)},
+        {"Stage 3", (1,0)},
+        {"Stage 4", (1,0)},
+        {"Stage 5", (1,0)}
     };
     private void SetMusic(string sceneName)
     {
