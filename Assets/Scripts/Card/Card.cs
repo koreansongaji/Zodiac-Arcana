@@ -11,6 +11,7 @@ public class Card : MonoBehaviour
 
     [SerializeField] private GameObject _playerFace;
     [SerializeField] private GameObject _enemyFace;
+    private CardFlipShader _shaderCard;
 
     [Header("Skill")]
     private TeamBuff _teamBuff;
@@ -24,17 +25,20 @@ public class Card : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (_cardStatus.Owner == CardOwner.Player)
-        {
-            _playerFace.SetActive(true);
-            _enemyFace.SetActive(false);
-        }
-        else if (_cardStatus.Owner == CardOwner.Enemy)
-        {
-            _playerFace.SetActive(false);
-            _enemyFace.SetActive(true);
-        }
+        _playerFace.SetActive(true);
+        _enemyFace.SetActive(true);
+        _shaderCard = _playerFace.GetComponent<CardFlipShader>();
+    /*if (_cardStatus.Owner == CardOwner.Player)
+    {
+        _playerFace.SetActive(true);
+        _enemyFace.SetActive(false);
     }
+    else if (_cardStatus.Owner == CardOwner.Enemy)
+    {
+        _playerFace.SetActive(false);
+        _enemyFace.SetActive(true);
+    }*/
+}
     private void OnEnable()
     {
         AddCardToManager();
@@ -187,14 +191,12 @@ public class Card : MonoBehaviour
     {
         if(_cardStatus.Owner == CardOwner.Player)
         {
-            _playerFace.SetActive(false);
-            _enemyFace.SetActive(true);
+            _shaderCard.flipCardPlayer();
             _cardStatus.Owner = CardOwner.Enemy;
         }
         else if (_cardStatus.Owner == CardOwner.Enemy)
         {
-            _playerFace.SetActive(true);
-            _enemyFace.SetActive(false);
+            _shaderCard.flipCardEnemy();
             _cardStatus.Owner = CardOwner.Player;
         }
         AddCardToManager();

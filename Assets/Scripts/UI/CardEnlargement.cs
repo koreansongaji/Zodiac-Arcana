@@ -14,8 +14,8 @@ public class CardEnlargement : MonoBehaviour
 
     public void Start()
     {
-        _targetScale = new Vector3(_scale, _scale, _scale);
         _originalScale = transform.localScale;
+        _targetScale = _originalScale * _scale;
         _outlineShader = GetComponent<Renderer>();
         _outlineShader.material = new Material(_outlineShader.sharedMaterial);
         _outlineShader.material.SetFloat("_Enabled", 0f);
@@ -28,7 +28,7 @@ public class CardEnlargement : MonoBehaviour
             StopCoroutine(_scaleCoroutine);
         _scaleCoroutine = StartCoroutine(ScaleTo(_targetScale));
 
- 
+
     }
     private void OnMouseExit()
     {
@@ -44,13 +44,13 @@ public class CardEnlargement : MonoBehaviour
     private IEnumerator ScaleTo(Vector3 target)
     {
         float time = 0;
-        while(time < _enlargeTime)
+        while (time < _enlargeTime)
         {
             transform.localScale = Vector3.Lerp(_originalScale, target, time / _enlargeTime);
             time += Time.deltaTime;
             yield return null;
         }
         transform.localScale = target;
-    } 
+    }
 
 }
