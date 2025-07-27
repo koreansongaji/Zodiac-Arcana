@@ -7,6 +7,10 @@ public class SoundMixerManager : MonoBehaviour
 {
     [SerializeField] private AudioMixer audioMixer;
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
     public void SetMasterVolume(float level)
     {
         audioMixer.SetFloat("masterVolume", Mathf.Log10(level) * 20);
