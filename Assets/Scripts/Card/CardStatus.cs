@@ -67,6 +67,18 @@ public class CardStatus : MonoBehaviour
         Stats.Left = CardData.Left + buffAmount.Left;
         Stats.Right = CardData.Right + buffAmount.Right;
 
+        if(CardType == CardType.AttackUp)
+        {
+            if(CurrentSlot.layer == LayerMask.NameToLayer("PlayerCardSlot") 
+                || CurrentSlot.layer == LayerMask.NameToLayer("EnemyCardSlot"))
+            {
+                Stats.Top += _card.Ability_Amount;
+                Stats.Bottom += _card.Ability_Amount;
+                Stats.Left += _card.Ability_Amount;
+                Stats.Right += _card.Ability_Amount;
+            }
+        }
+
         // Update the card's visual representation if needed
         // For example, update a UI element or sprite to reflect the new stats
         _showCardStatus?.UpdateShowStatuse();

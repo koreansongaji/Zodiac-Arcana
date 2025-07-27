@@ -9,7 +9,10 @@ public class BattleManager : Singleton<BattleManager>
 {
     public TurnState CurrentTurn { get; private set; } //읽기만 가능
     public int Stage; // 현재 스테이지 번호
-    public int Round;
+
+    [Tooltip("플레이어나 적이 한 번 행동하면 라운드가 증가")]
+    public int Round; // 플레이어나 적이 한 번 행동하면 라운드가 증가
+    [Header("턴 시간")]
     public float PlayerTime = 31.0f;
     public float EnemyTime  = 31.0f;
 
@@ -109,47 +112,61 @@ public class BattleManager : Singleton<BattleManager>
         //Debug.Log($"스테이지 {Stage} 시작");
         StartPlayerTurn();
     }
+    public void EndStage()
+    {
+    }
     public void StartTurn()
     {
+        Round++;
+        Debug.Log($"스테이지 {Stage} 라운드 {Round} 시작");
+
+
+
         //Debug.Log($"턴 시작: {CurrentTurn}");
         PlayerTeamBuff = new CardStats(0, 0, 0, 0);
         EnemyTeamBuff = new CardStats(0, 0, 0, 0);
         foreach (var card in PlayerCards)
         {
-            if((LayerMask.GetMask("FieldCardSlot") & (1<<card.GetComponent<CardStatus>().CurrentSlot.layer)) != 0)
-            {
+            //if((LayerMask.GetMask("FieldCardSlot") & (1<<card.GetComponent<CardStatus>().CurrentSlot.layer)) != 0)
+            //{
                 //Debug.Log($"카드 {card.name}의 능력 사용");
                 card.GetComponent<Card>().UseSkill();
-            }
+            //}
         }
         foreach (var card in EnemyCards)
         {
-            if ((LayerMask.GetMask("FieldCardSlot") & (1 << card.GetComponent<CardStatus>().CurrentSlot.layer)) != 0)
-            {
+            //if ((LayerMask.GetMask("FieldCardSlot") & (1 << card.GetComponent<CardStatus>().CurrentSlot.layer)) != 0)
+            //{
                 //Debug.Log($"적 카드 {card.name}의 능력 사용");
                 card.GetComponent<Card>().UseSkill();
-            }
+            //}
         }
 
         foreach (var card in PlayerCards)
         {
-            if ((LayerMask.GetMask("FieldCardSlot") & (1 << card.GetComponent<CardStatus>().CurrentSlot.layer)) != 0)
-            {
+            //if ((LayerMask.GetMask("FieldCardSlot") & (1 << card.GetComponent<CardStatus>().CurrentSlot.layer)) != 0)
+            //{
                 //Debug.Log($"플레이어 카드 {card.name}의 능력 사용");
                 card.GetComponent<CardStatus>().ChangeStatus(PlayerTeamBuff);
-            }
+            //}
         }
         foreach (var card in EnemyCards)
         {
-            if ((LayerMask.GetMask("FieldCardSlot") & (1 << card.GetComponent<CardStatus>().CurrentSlot.layer)) != 0)
-            {
+            //if ((LayerMask.GetMask("FieldCardSlot") & (1 << card.GetComponent<CardStatus>().CurrentSlot.layer)) != 0)
+            //{
                 //Debug.Log($"적 카드 {card.name}의 능력 사용");
                 card.GetComponent<CardStatus>().ChangeStatus(EnemyTeamBuff);
-            }
+            //}
         }
-
+        BattleManager.Instance.BattleUI.CardCount();
+        if (Round >= 10)
+        {
+            Debug.Log("라운드 10에 도달했습니다. 스테이지를 종료합니다.");
+            EndStage(); // 라운드 10에 도달하면 스테이지 종료
+            return;
+        }
         //--------------- 턴 시간 초기화 -----------------
-        if(CurrentTurn == TurnState.PlayerTurn)
+        if (CurrentTurn == TurnState.PlayerTurn)
         {
             PlayerTime = 31.0f; // 플레이어 턴 시간 초기화
         }

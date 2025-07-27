@@ -240,6 +240,12 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!223 &1693016679 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 6966594849665458764, guid: ab42abbb2b3beb74e8493c950dae5377,
+    type: 3}
+  m_PrefabInstance: {fileID: 2680379805463021440}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1704078786
 GameObject:
   m_ObjectHideFlags: 0
@@ -473,6 +479,21 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 711207046721411652, guid: ab42abbb2b3beb74e8493c950dae5377,
+        type: 3}
+      propertyPath: Ability_Amount
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2412921394094873314, guid: ab42abbb2b3beb74e8493c950dae5377,
+        type: 3}
+      propertyPath: Ability_Amount
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982250533677142707, guid: ab42abbb2b3beb74e8493c950dae5377,
+        type: 3}
+      propertyPath: m_FillAmount
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3535358696715750891, guid: ab42abbb2b3beb74e8493c950dae5377,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -482,6 +503,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4008047044617660627, guid: ab42abbb2b3beb74e8493c950dae5377,
+        type: 3}
+      propertyPath: _textCanvas
+      value: 
+      objectReference: {fileID: 1693016679}
+    - target: {fileID: 4114491555988507869, guid: ab42abbb2b3beb74e8493c950dae5377,
+        type: 3}
+      propertyPath: CardType
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4631746995397359605, guid: ab42abbb2b3beb74e8493c950dae5377,
         type: 3}
@@ -537,6 +568,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5861269499031777416, guid: ab42abbb2b3beb74e8493c950dae5377,
+        type: 3}
+      propertyPath: CardType
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8788130071890915374, guid: ab42abbb2b3beb74e8493c950dae5377,
+        type: 3}
+      propertyPath: CardType
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -14,12 +14,14 @@ public class Card : MonoBehaviour
 
     [Header("Skill")]
     private TeamBuff _teamBuff;
-    [SerializeField] private int _ability_Amount = 1; // 팀 버프 적용량, 카운터 감소량 등
+    private AttackUp _attackUp;
+    public int Ability_Amount = 1; // 팀 버프 적용량, 카운터 감소량 등
     private void Awake()
     {
         _cardStatus = GetComponent<CardStatus>();
         _setPositionCard = GetComponent<SetPositionCard>();
         TryGetComponent<TeamBuff>(out _teamBuff);
+        TryGetComponent<AttackUp>(out _attackUp);
     }
     // Start is called before the first frame update
     void Start()
@@ -176,9 +178,28 @@ public class Card : MonoBehaviour
             }
             if (_teamBuff != null)
             {
-                _teamBuff.ApplyBuffToTeam(_cardStatus.Owner, _ability_Amount);
+                if(_cardStatus.CurrentSlot.layer == LayerMask.NameToLayer("FieldCardSlot"))
+                {
+                    // 플레이어 팀 버프 적용
+                    _teamBuff.ApplyBuffToTeam(_cardStatus.Owner, Ability_Amount);
+                }
             }
         }
+        //else if(_cardStatus.CardType == CardType.Counter)
+        //{
+        //    // 카운터 스킬 사용 로직
+        //    //Debug.Log("카운터 스킬 사용 중입니다.");
+        //}
+        //else if(_cardStatus.CardType == CardType.DefenseUp)
+        //{
+        //    // 방어력 증가 스킬 사용 로직
+        //    //Debug.Log("방어력 증가 스킬 사용 중입니다.");
+        //}
+        //else if(_cardStatus.CardType == CardType.Ability_Nullification)
+        //{
+        //    // 능력 무효화 스킬 사용 로직
+        //    //Debug.Log("능력 무효화 스킬 사용 중입니다.");
+        //}
     }
     /// <summary>
     /// 카드를 뒤집는 메서드입니다. 카드의 상태를 변경하고 애니메이션을 실행합니다.
