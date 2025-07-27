@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -18,6 +20,11 @@ public class EnemyAI : MonoBehaviour
     public List<CardWeight> EnemyHandCards = new List<CardWeight>();
     public List<GameObject> EmptySlots = new List<GameObject>();
     // Start is called before the first frame update
+    private Coroutine _enemyAITurnCoroutine;
+    private void Awake()
+    {
+        _enemyAITurnCoroutine = null;
+    }
     void Start()
     {
 
@@ -33,9 +40,9 @@ public class EnemyAI : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (BattleManager.Instance.CurrentTurn == TurnState.EnemyTurn)
+        if (BattleManager.Instance.CurrentTurn == TurnState.EnemyTurn && _enemyAITurnCoroutine == null)
         {
-            StartAITurn();
+            _enemyAITurnCoroutine = StartCoroutine(IE_StartAITurn());
         }
     }
     //private void ResetEnemyAI()
@@ -43,12 +50,12 @@ public class EnemyAI : MonoBehaviour
     //    EnemyHandCards.Clear();
     //    EnemyHandCards.AddRange(_enemyCards);
     //}
-    public void StartAITurn()
+    IEnumerator IE_StartAITurn()
     {
+        float waitTime = UnityEngine.Random.Range(2, 5);
+        yield return new WaitForSeconds(waitTime); // Wait for a short duration before starting the AI turn
         EnemyHandCards.Clear();
         EmptySlots.Clear();
-
-
 
         foreach (var slot in _enemyHandSlots)
         {
@@ -61,8 +68,12 @@ public class EnemyAI : MonoBehaviour
             if (slot.GetComponent<SlotInfo>().OccupiedCard != null)
             {
                 cardWeight.CurrentCard = slot.GetComponent<SlotInfo>().OccupiedCard; // Get the card in the slot
+                EnemyHandCards.Add(cardWeight); // Initialize the list with empty card weights
             }
-            EnemyHandCards.Add(cardWeight); // Initialize the list with empty card weights
+            else
+            {
+                continue;
+            }
         }
 
         foreach (var slot in BattleManager.Instance.FieldSlots)
@@ -74,19 +85,19 @@ public class EnemyAI : MonoBehaviour
         }
         if(EnemyHandCards.Count == 0 || EmptySlots.Count == 0)
         {
-            BattleManager.Instance.EndEnemyTurn(); // End turn if no cards or slots available
-            return;
+            BattleManager.Instance.EndEnemyTurn(); // End enemy turn if there are no cards in hand or no empty slots
+            yield break; // If there are no cards in hand or no empty slots, exit the coroutine
         }
 
-        GameObject selectedCard = EnemyHandCards[Random.Range(0, EnemyHandCards.Count)].CurrentCard;
-        GameObject selectedSlot = EmptySlots[Random.Range(0, EmptySlots.Count)];
+        GameObject selectedCard = EnemyHandCards[UnityEngine.Random.Range(0, EnemyHandCards.Count)].CurrentCard;
+        GameObject selectedSlot = EmptySlots[UnityEngine.Random.Range(0, EmptySlots.Count)];
 
         if (BattleManager.Instance.Stage == 1)
         {
-            if (BattleManager.Instance.Round <= 2)
+            if (BattleManager.Instance.Round <= 4)
             {
-                selectedCard = EnemyHandCards[Random.Range(0, EnemyHandCards.Count)].CurrentCard; // Randomly select a card from hand
-                selectedSlot = EmptySlots[Random.Range(0, EmptySlots.Count)]; // Randomly select an empty slot
+                selectedCard = EnemyHandCards[UnityEngine.Random.Range(0, EnemyHandCards.Count)].CurrentCard; // Randomly select a card from hand
+                selectedSlot = EmptySlots[UnityEngine.Random.Range(0, EmptySlots.Count)]; // Randomly select an empty slot
             }
         }
         else
@@ -98,7 +109,7 @@ public class EnemyAI : MonoBehaviour
                     continue; // Skip if the card is null
                 }
 
-                int maxWeight = 0;
+                int maxWeight = int.MinValue;
                 GameObject maxWeightSlot = null;
                 var card = EnemyHandCards[index].CurrentCard;
 
@@ -160,12 +171,12 @@ public class EnemyAI : MonoBehaviour
                     {
                         weight += (card.GetComponent<CardStatus>().CardData.SurroundingCardBase - card.GetComponent<CardStatus>().Stats.Bottom);
                     }
-
+                    //Debug.Log($"가중치: {weight}");
                     if (maxWeight < weight)
                     {
                         maxWeight = weight;
                         maxWeightSlot = slot; // Update the slot with the maximum weight
-
+                        //Debug.Log($"Card: {card},\nSlot: {slot},\nWeight: {weight}\n");
                     }
                 }
 
@@ -175,23 +186,37 @@ public class EnemyAI : MonoBehaviour
                     MaxWeightSlot = maxWeightSlot,
                     Weight = maxWeight
                 }; // Update the card weight with the maximum weight slot
+                //Debug.Log($"Card: {card},\nMax Weight Slot: {maxWeightSlot},\nWeight: {maxWeight}\n");
             }
 
             int maxWeightIndex = EnemyHandCards.FindIndex(card => card.Weight == EnemyHandCards.Max(c => c.Weight));
 
             selectedCard = EnemyHandCards[maxWeightIndex].CurrentCard; // Select the card with the maximum weight
             selectedSlot = EnemyHandCards[maxWeightIndex].MaxWeightSlot; // Select the slot with the maximum weight
+            //Debug.Log($"Selected Card: {selectedCard},\nSelected Slot: {selectedSlot},\nWeight: {EnemyHandCards[maxWeightIndex]}\n");
         }
 
 
-        if (selectedCard.GetComponent<CardStatus>().CurrentSlot.GetComponent<SlotInfo>().OccupiedCard != null)
+        var status = selectedCard?.GetComponent<CardStatus>();
+        if (status != null)
         {
-            selectedCard.GetComponent<CardStatus>().CurrentSlot.GetComponent<SlotInfo>().OccupiedCard = null; // Clear the current slot of the card
+            var currentSlot = status.CurrentSlot;
+            if (currentSlot != null)
+            {
+                var slotInfo = currentSlot.GetComponent<SlotInfo>();
+                if (slotInfo != null && slotInfo.OccupiedCard != null)
+                {
+                    slotInfo.OccupiedCard = null;
+                }
+            }
         }
-
+        if (selectedCard == null || selectedSlot == null)
+        {
+        }
         selectedCard.transform.position = selectedSlot.transform.position;
         selectedCard.GetComponent<SetPositionCard>().SetDropCard();
         selectedCard.GetComponent<Card>().CompareWithAdjacentCards(); // Compare with adjacent cards after placing
         BattleManager.Instance.EndEnemyTurn(); // End enemy turn after placing the card
+        _enemyAITurnCoroutine = null; // Reset the coroutine reference
     }
 }

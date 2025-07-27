@@ -25,6 +25,5 @@ public class UI_TurnIndicator : MonoBehaviour
     public void SetTurnIndicator(bool isPlayerTurn)
     {
         _playerTurnAnimator.SetBool("isPlayerTurn", isPlayerTurn);
-        Debug.Log($"SetTurnIndicator: {isPlayerTurn}");
     }
 }

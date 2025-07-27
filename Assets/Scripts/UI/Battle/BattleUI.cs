@@ -69,15 +69,12 @@ public class BattleUI : MonoBehaviour
 
     public void ChangeTurnIndicator(TurnState turnState)
     {
-        Debug.Log($"턴 상태 변경: {turnState}");
         if (turnState == TurnState.PlayerTurn)
         {
-            Debug.Log("플레이어 턴");
             _turnIndicator.GetComponent<UI_TurnIndicator>().SetTurnIndicator(true);
         }
         else if(turnState == TurnState.EnemyTurn)
         {
-            Debug.Log("적 턴");
             _turnIndicator.GetComponent<UI_TurnIndicator>().SetTurnIndicator(false);
         }
     }
