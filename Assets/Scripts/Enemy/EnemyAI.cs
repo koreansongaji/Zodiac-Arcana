@@ -20,6 +20,11 @@ public class EnemyAI : MonoBehaviour
     public List<CardWeight> EnemyHandCards = new List<CardWeight>();
     public List<GameObject> EmptySlots = new List<GameObject>();
     // Start is called before the first frame update
+    private Coroutine _enemyAITurnCoroutine;
+    private void Awake()
+    {
+        _enemyAITurnCoroutine = null;
+    }
     void Start()
     {
 
@@ -35,9 +40,9 @@ public class EnemyAI : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (BattleManager.Instance.CurrentTurn == TurnState.EnemyTurn)
+        if (BattleManager.Instance.CurrentTurn == TurnState.EnemyTurn && _enemyAITurnCoroutine == null)
         {
-            StartAITurn();
+            _enemyAITurnCoroutine = StartCoroutine(IE_StartAITurn());
         }
     }
     //private void ResetEnemyAI()
@@ -45,8 +50,10 @@ public class EnemyAI : MonoBehaviour
     //    EnemyHandCards.Clear();
     //    EnemyHandCards.AddRange(_enemyCards);
     //}
-    public void StartAITurn()
+    IEnumerator IE_StartAITurn()
     {
+        float waitTime = UnityEngine.Random.Range(2, 5);
+        yield return new WaitForSeconds(waitTime); // Wait for a short duration before starting the AI turn
         EnemyHandCards.Clear();
         EmptySlots.Clear();
 
@@ -78,8 +85,8 @@ public class EnemyAI : MonoBehaviour
         }
         if(EnemyHandCards.Count == 0 || EmptySlots.Count == 0)
         {
-            BattleManager.Instance.EndEnemyTurn(); // End turn if no cards or slots available
-            return;
+            BattleManager.Instance.EndEnemyTurn(); // End enemy turn if there are no cards in hand or no empty slots
+            yield break; // If there are no cards in hand or no empty slots, exit the coroutine
         }
 
         GameObject selectedCard = EnemyHandCards[UnityEngine.Random.Range(0, EnemyHandCards.Count)].CurrentCard;
@@ -205,13 +212,11 @@ public class EnemyAI : MonoBehaviour
         }
         if (selectedCard == null || selectedSlot == null)
         {
-            //Debug.LogError(selectedCard);
-            //Debug.LogError(selectedSlot);
-            return;
         }
         selectedCard.transform.position = selectedSlot.transform.position;
         selectedCard.GetComponent<SetPositionCard>().SetDropCard();
         selectedCard.GetComponent<Card>().CompareWithAdjacentCards(); // Compare with adjacent cards after placing
         BattleManager.Instance.EndEnemyTurn(); // End enemy turn after placing the card
+        _enemyAITurnCoroutine = null; // Reset the coroutine reference
     }
 }

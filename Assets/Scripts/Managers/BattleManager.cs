@@ -45,7 +45,7 @@ public class BattleManager : Singleton<BattleManager>
     }
     void Start()
     {
-        StartPlayerTurn();
+        StartEnemyTurn();
     }
     private void FixedUpdate()
     {
