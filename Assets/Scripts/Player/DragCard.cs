@@ -1,4 +1,4 @@
-using Autodesk.Fbx;
+ï»¿using Autodesk.Fbx;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -29,10 +29,10 @@ public class DragCard : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetMouseButton(0) && !_isMouseClickCoolDown 
-            && (BattleTurnManager.Instance.currentTurn == BattleTurnManager.TurnState.PlayerTurn))
+        if (Input.GetMouseButtonDown(0) && !_isMouseClickCoolDown
+            && (BattleManager.Instance.CurrentTurn == TurnState.PlayerTurn)) //ì¢Œí´ë¦­
         {
-            if (CurSelectedCard != null)
+            if (CurSelectedCard != null) //ë‚´ë ¤ ë†“ê¸°
             {
                 Vector2 point = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
                 Ray2D ray2D = new Ray2D(point, _mainCamera.transform.forward);
@@ -46,7 +46,7 @@ public class DragCard : MonoBehaviour
                     DropHitCardToSlot(hit2D.transform.gameObject);
                 }
             }
-            else
+            else //ì¹´ë“œ ë“¤ê¸°
             {
                 Vector2 point = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
                 Ray2D ray2D = new Ray2D(point, _mainCamera.transform.forward);
@@ -61,10 +61,11 @@ public class DragCard : MonoBehaviour
                 }
             }
         }
-        if(Input.GetMouseButtonDown(1) && CurSelectedCard != null)
+        if(Input.GetMouseButtonDown(1) && CurSelectedCard != null) //ìš°í´ë¦­
         {
             // Right-click to cancel selection and return card to original position
             CurSelectedCard.transform.position = _selectedCardOriginalSlot.transform.position;
+            CurSelectedCard.GetComponent<SetPositionCard>().SetSortingLayer(); // Set sorting layer after placing the card
             CurSelectedCard = null;
             StartMouseCoolTimer();
         }
@@ -85,11 +86,12 @@ public class DragCard : MonoBehaviour
         {
             return; // Ensure the hit object is a card
         }
-        //ºñÆ®, ½ÃÇÁÆ® ¿¬»êÀÚ »ç¿ëÇß´Âµ¥ Àß ¸ğ¸£°ÚÀ½;;
-        if (((1 << hitCard.GetComponent<SetPositionCard>().CurrentSlot.gameObject.layer) & _pickUpCardSlotLayerMask) != 0) 
+        //ë¹„íŠ¸, ì‹œí”„íŠ¸ ì—°ì‚°ì ì‚¬ìš©í–ˆëŠ”ë° ì˜ ëª¨ë¥´ê² ìŒ;;
+        if (((1 << hitCard.GetComponent<CardStatus>().CurrentSlot.gameObject.layer) & _pickUpCardSlotLayerMask) != 0) 
         {
             CurSelectedCard = hitCard;
-            _selectedCardOriginalSlot = CurSelectedCard.GetComponent<SetPositionCard>().CurrentSlot;
+            CurSelectedCard.GetComponent<SetPositionCard>().SetSortingLayer(); // Set sorting layer after placing the card
+            _selectedCardOriginalSlot = CurSelectedCard.GetComponent<CardStatus>().CurrentSlot;
         }
         StartMouseCoolTimer();
     }
@@ -101,8 +103,10 @@ public class DragCard : MonoBehaviour
             _selectedCardOriginalSlot.GetComponent<SlotInfo>().OccupiedCard = null; // Clear the original slot
             CurSelectedCard.transform.position = hitSlot.transform.position;
             CurSelectedCard.GetComponent<SetPositionCard>().SetDropCard();
+            CurSelectedCard.GetComponent<Card>().CompareWithAdjacentCards(); // Compare with adjacent cards after placing
+            CurSelectedCard.GetComponent<SetPositionCard>().SetSortingLayer(); // Set sorting layer after placing the card
             CurSelectedCard = null;
-            BattleTurnManager.Instance.EndPlayerTurn(); // End player turn after placing the card
+            BattleManager.Instance.EndPlayerTurn(); // End player turn after placing the card
         }
         StartMouseCoolTimer();
     }
