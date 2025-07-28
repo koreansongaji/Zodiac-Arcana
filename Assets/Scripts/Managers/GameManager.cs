@@ -4,6 +4,7 @@ using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+//using static System.Net.WebRequestMethods;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -13,13 +14,16 @@ public class GameManager : Singleton<GameManager>
     public SaveData StageData = new SaveData();
     private void Awake()
     {
+        saveFilePath = Path.Combine(Application.persistentDataPath, "savefile.json");
+        Debug.Log("Save file path: " + saveFilePath);
+        SaveDataLoad(); // 게임 시작 시 저장된 데이터를 불러옴
         base.Awake();
         // 초기화 작업
     }
     // Start is called before the first frame update
     void Start()
     {
-        saveFilePath = Path.Combine(Application.dataPath, "savefile.json");
+
     }
 
     // Update is called once per frame
