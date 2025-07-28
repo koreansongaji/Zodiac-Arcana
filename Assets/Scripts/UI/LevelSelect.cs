@@ -53,7 +53,7 @@ public class LevelSelect : MonoBehaviour
             LineCreator lineDraw = _levelConnector[j].GetComponentInChildren<LineCreator>();
             lineDraw.EnableConnector();
         }
-        if(levelsCleared < _levelConnector.Count && levelsCleared != 0)
+        if(levelsCleared <= _levelConnector.Count && levelsCleared != 0)
         {
             LineCreator lineDraw = _levelConnector[j].GetComponentInChildren<LineCreator>();
             lineDraw.LineDrawer();
