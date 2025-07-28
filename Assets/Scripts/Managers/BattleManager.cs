@@ -118,9 +118,7 @@ public class BattleManager : Singleton<BattleManager>
     public void StartTurn()
     {
         Round++;
-        Debug.Log($"스테이지 {Stage} 라운드 {Round} 시작");
-
-
+        //Debug.Log($"스테이지 {Stage} 라운드 {Round} 시작");
 
         //Debug.Log($"턴 시작: {CurrentTurn}");
         PlayerTeamBuff = new CardStats(0, 0, 0, 0);
