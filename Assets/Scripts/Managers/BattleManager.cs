@@ -65,7 +65,7 @@ public class BattleManager : Singleton<BattleManager>
             if (PlayerTime <= 0)
             {
                 PlayerTime = 0;
-
+                EndTime();
             }
         }
         else if(CurrentTurn == TurnState.EnemyTurn)
@@ -150,6 +150,7 @@ public class BattleManager : Singleton<BattleManager>
             return;
         }
         Round++;
+        Debug.Log($"라운드: {Round}");
         //Debug.Log($"스테이지 {Stage} 라운드 {Round} 시작");
 
         //Debug.Log($"턴 시작: {CurrentTurn}");
@@ -192,7 +193,17 @@ public class BattleManager : Singleton<BattleManager>
         {
             BattleManager.Instance.BattleUI.CardCount();
         }
-        if (Round >= 9)
+
+        int emptyFieldSlots = 0;
+        foreach (var slot in FieldSlots)
+        {
+            if (slot.GetComponent<SlotInfo>().OccupiedCard == null)
+            {
+                emptyFieldSlots++;
+            }
+        }
+
+        if ((Round >= 10) || emptyFieldSlots == 0)
         {
             Debug.Log("라운드 10에 도달했습니다. 스테이지를 종료합니다.");
             EndStage(); // 라운드 10에 도달하면 스테이지 종료
@@ -210,6 +221,40 @@ public class BattleManager : Singleton<BattleManager>
         if(BattleUI != null)
         {
             BattleUI.ChangeTurnIndicator(CurrentTurn);
+        }
+    }
+    public void EndTime()
+    {
+        if(CurrentTurn == TurnState.PlayerTurn)
+        {
+            CurrentTurn = TurnState.EnemyTurn; // 플레이어 턴이 끝나면 적 턴으로 전환
+
+            GameObject selectCard = null;
+            GameObject emptySlot = null;
+            foreach (var slot in PlayerSlots)
+            {
+                if (slot.GetComponent<SlotInfo>().OccupiedCard != null)
+                {
+                    selectCard = slot.GetComponent<SlotInfo>().OccupiedCard;
+                    slot.GetComponent<SlotInfo>().OccupiedCard = null; // 슬롯에서 카드 제거
+                    break; // 선택된 카드가 있으면 반복문 종료
+                }
+            }
+            foreach (var slot in FieldSlots)
+            {
+                if (slot.GetComponent<SlotInfo>().OccupiedCard == null)
+                {
+                    emptySlot = slot;
+                    slot.GetComponent<SlotInfo>().OccupiedCard = null; // 슬롯에 카드 할당
+                    break; // 빈 슬롯이 있으면 반복문 종료
+                }
+            }
+            selectCard.GetComponent<CardStatus>().CurrentSlot.GetComponent<SlotInfo>().OccupiedCard = null; // 카드의 현재 슬롯에서 카드 제거
+            selectCard.transform.position = emptySlot.transform.position;
+            selectCard.GetComponent<SetPositionCard>().SetDropCard();
+            selectCard.GetComponent<Card>().CompareWithAdjacentCards();
+            emptySlot.GetComponent<SlotInfo>().OccupiedCard = selectCard; // 슬롯에 카드 할당
+            EndPlayerTurn();
         }
     }
     public void PlayerWin()

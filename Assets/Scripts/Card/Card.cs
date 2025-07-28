@@ -32,17 +32,28 @@ public class Card : MonoBehaviour
         _playerFace.SetActive(true);
         _enemyFace.SetActive(true);
         _shaderCard = _playerFace.GetComponent<CardFlipShader>();
-    if (_cardStatus.Owner == CardOwner.Player)
-    {
+        if (_cardStatus.Owner == CardOwner.Player)
+        {
             _shaderCard.flipCardPlayer();
-    }
-    else if (_cardStatus.Owner == CardOwner.Enemy)
-    {
+        }
+        else if (_cardStatus.Owner == CardOwner.Enemy)
+        {
             _shaderCard.flipCardEnemy();
         }
-}
+    }
     private void OnEnable()
     {
+        _playerFace.SetActive(true);
+        _enemyFace.SetActive(true);
+        _shaderCard = _playerFace.GetComponent<CardFlipShader>();
+        if (_cardStatus.Owner == CardOwner.Player)
+        {
+            _shaderCard.flipCardPlayer();
+        }
+        else if (_cardStatus.Owner == CardOwner.Enemy)
+        {
+            _shaderCard.flipCardEnemy();
+        }
         AddCardToManager();
     }
     private void AddCardToManager()

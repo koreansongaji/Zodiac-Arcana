@@ -61,12 +61,18 @@ public class DragCard : MonoBehaviour
                 }
             }
         }
-        if(Input.GetMouseButtonDown(1) && CurSelectedCard != null) //우클릭
+        if((Input.GetMouseButtonDown(1) && CurSelectedCard != null) 
+            || (BattleManager.Instance.PlayerTime <= 1)) //우클릭
         {
-            // Right-click to cancel selection and return card to original position
-            CurSelectedCard.transform.position = _selectedCardOriginalSlot.transform.position;
-            CurSelectedCard.GetComponent<SetPositionCard>().SetSortingLayer(); // Set sorting layer after placing the card
+            if(CurSelectedCard != null)
+            {
+                // Right-click to cancel selection and return card to original position
+                CurSelectedCard.transform.position = _selectedCardOriginalSlot.transform.position;
+                CurSelectedCard.GetComponent<SetPositionCard>().SetSortingLayer(); // Set sorting layer after placing the card
+                CurSelectedCard = null;
+            }
             CurSelectedCard = null;
+
             StartMouseCoolTimer();
         }
 
