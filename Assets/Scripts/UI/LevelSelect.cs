@@ -17,7 +17,7 @@ public class LevelSelect : MonoBehaviour
     private int _levelsCleared = 0;
     void Start()
     {
-        _levelsCleared = 0;
+        _levelsCleared = 2;
         UnlockStagesSound(_levelsCleared);
     }
     public void MouseHoverSound()
