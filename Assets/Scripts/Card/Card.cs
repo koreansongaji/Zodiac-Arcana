@@ -15,6 +15,7 @@ public class Card : MonoBehaviour
     [Header("Skill")]
     private TeamBuff _teamBuff;
     private AttackUp _attackUp;
+    private DefenseUp _defenseUp;
     public int Ability_Amount = 1; // 팀 버프 적용량, 카운터 감소량 등
     private void Awake()
     {
@@ -22,6 +23,7 @@ public class Card : MonoBehaviour
         _setPositionCard = GetComponent<SetPositionCard>();
         TryGetComponent<TeamBuff>(out _teamBuff);
         TryGetComponent<AttackUp>(out _attackUp);
+        TryGetComponent<DefenseUp>(out _defenseUp);
     }
     // Start is called before the first frame update
     void Start()
@@ -178,22 +180,18 @@ public class Card : MonoBehaviour
             }
             if (_teamBuff != null)
             {
-                if(_cardStatus.CurrentSlot.layer == LayerMask.NameToLayer("FieldCardSlot"))
+                if (_cardStatus.CurrentSlot.layer == LayerMask.NameToLayer("FieldCardSlot"))
                 {
                     // 플레이어 팀 버프 적용
                     _teamBuff.ApplyBuffToTeam(_cardStatus.Owner, Ability_Amount);
                 }
             }
         }
+
         //else if(_cardStatus.CardType == CardType.Counter)
         //{
         //    // 카운터 스킬 사용 로직
         //    //Debug.Log("카운터 스킬 사용 중입니다.");
-        //}
-        //else if(_cardStatus.CardType == CardType.DefenseUp)
-        //{
-        //    // 방어력 증가 스킬 사용 로직
-        //    //Debug.Log("방어력 증가 스킬 사용 중입니다.");
         //}
         //else if(_cardStatus.CardType == CardType.Ability_Nullification)
         //{

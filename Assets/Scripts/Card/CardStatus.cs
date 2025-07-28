@@ -41,6 +41,7 @@ public class CardStatus : MonoBehaviour
 
     private Card _card;
     private SetPositionCard _setPositionCard;
+    private DefenseUp _defenseUp;
 
     public CardStats Stats = new CardStats();
 
@@ -54,9 +55,11 @@ public class CardStatus : MonoBehaviour
     private void Awake()
     {
         Stats = new CardStats(CardData.Top, CardData.Bottom, CardData.Left, CardData.Right);
+        CardType = CardData.Type;
 
         _card = GetComponent<Card>();
         _setPositionCard = GetComponent<SetPositionCard>();
+        TryGetComponent<DefenseUp>(out _defenseUp);
     }
     
     public void ChangeStatus(CardStats buffAmount)
@@ -76,6 +79,20 @@ public class CardStatus : MonoBehaviour
                 Stats.Bottom += _card.Ability_Amount;
                 Stats.Left += _card.Ability_Amount;
                 Stats.Right += _card.Ability_Amount;
+            }
+        }
+        else if (CardType == CardType.DefenseUp)
+        {
+            Debug.Log("방어력 증가 스킬 사용 중입니다.");
+            if (_defenseUp == null)
+            {
+                TryGetComponent<DefenseUp>(out _defenseUp);
+            }
+            if (_defenseUp != null)
+            {
+                // 방어력 증가 스킬 사용
+                Debug.Log($"방어력 증가 스킬 사용: {name}, 방어력 증가량: {_card.Ability_Amount}");
+                _defenseUp.StartDefenseUp(this, _card.Ability_Amount);
             }
         }
 

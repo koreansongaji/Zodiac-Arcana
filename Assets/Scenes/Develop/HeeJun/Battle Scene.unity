@@ -383,6 +383,24 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!1 &2009756002 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8393761554810520329, guid: ab42abbb2b3beb74e8493c950dae5377,
+    type: 3}
+  m_PrefabInstance: {fileID: 2680379805463021440}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2009756009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009756002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bbeb46bf3dd49e46a9cf3b87edc0b05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1295448588917628448
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -574,6 +592,11 @@ PrefabInstance:
       propertyPath: CardType
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 8022921472539363010, guid: ab42abbb2b3beb74e8493c950dae5377,
+        type: 3}
+      propertyPath: CardType
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8788130071890915374, guid: ab42abbb2b3beb74e8493c950dae5377,
         type: 3}
       propertyPath: CardType
@@ -582,7 +605,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8393761554810520329, guid: ab42abbb2b3beb74e8493c950dae5377,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2009756009}
   m_SourcePrefab: {fileID: 100100000, guid: ab42abbb2b3beb74e8493c950dae5377, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
