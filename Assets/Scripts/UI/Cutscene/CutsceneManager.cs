@@ -15,6 +15,7 @@ public class CutsceneManager : MonoBehaviour
     private int _finished = 0;
     private void Start()
     {
+
         _scene[0].alpha = 1;
         for (int i = 1; i < _scene.Count; i++)
         {
