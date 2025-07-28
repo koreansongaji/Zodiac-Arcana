@@ -92,7 +92,7 @@ public class EnemyAI : MonoBehaviour
         GameObject selectedCard = EnemyHandCards[UnityEngine.Random.Range(0, EnemyHandCards.Count)].CurrentCard;
         GameObject selectedSlot = EmptySlots[UnityEngine.Random.Range(0, EmptySlots.Count)];
 
-        if (BattleManager.Instance.Stage == 1)
+        if (BattleManager.Instance.stage == 1)
         {
             if (BattleManager.Instance.Round <= 4)
             {

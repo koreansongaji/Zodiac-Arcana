@@ -1,15 +1,15 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class SoundMixerManager : MonoBehaviour
+public class SoundMixerManager : Singleton<SoundMixerManager>
 {
     [SerializeField] private AudioMixer audioMixer;
 
-    private void Awake()
+    protected override void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        base.Awake();
     }
     public void SetMasterVolume(float level)
     {

@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,7 +17,9 @@ public class LevelSelect : MonoBehaviour
     private int _levelsCleared = 0;
     void Start()
     {
-        _levelsCleared = 2;
+        GameManager.Instance.SaveDataLoad();
+        _levelsCleared = GameManager.Instance.StageData.Stage;
+
         UnlockStagesSound(_levelsCleared);
     }
     public void MouseHoverSound()

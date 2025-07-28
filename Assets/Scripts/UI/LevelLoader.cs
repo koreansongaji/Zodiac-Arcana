@@ -60,6 +60,7 @@ public class LevelLoader : MonoBehaviour
         _transition.SetTrigger("Start");
         yield return new WaitForSeconds(_transitionTime);
         Debug.Log("Loading Scene");
+        BattleManager.Instance.ResetStage(GameManager.Instance.StageData.Stage);
         SceneManager.LoadScene(levelIndex);
     }
 }
