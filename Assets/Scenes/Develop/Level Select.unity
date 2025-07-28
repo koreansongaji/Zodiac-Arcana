@@ -364,7 +364,7 @@ MonoBehaviour:
   - {fileID: 554212263}
   - {fileID: 685860669}
   - {fileID: 1689711280}
-  _stageHoverSoundClip: {fileID: 8300000, guid: 38a51f37b4f90ae48adfdd12323667c5,
+  _stageHoverSoundClip: {fileID: 8300000, guid: bbea0874489677149bb2d54580a6c55b,
     type: 3}
   _stageClickSoundClip: {fileID: 8300000, guid: 3740369f80cbf61499250c247a469176,
     type: 3}
