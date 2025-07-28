@@ -18,7 +18,7 @@ MonoBehaviour:
   right: 4
   bottom: 3
   type: 0
-  flipCountWeight: 6
-  earlyTurnStandard: 2
-  earlyTurnPenalty: 5
+  flipCountWeight: 3
+  earlyTurnStandard: 1
+  earlyTurnPenalty: 2
   surroundingCardBase: 5

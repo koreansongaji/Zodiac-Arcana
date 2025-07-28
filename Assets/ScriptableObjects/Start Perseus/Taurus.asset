@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Taurus
   m_EditorClassIdentifier: 
   cardName: Taurus
-  left: 5
-  top: 6
-  right: 6
-  bottom: 3
+  left: 4
+  top: 5
+  right: 7
+  bottom: 4
   type: 0
   flipCountWeight: 4
   earlyTurnStandard: 1

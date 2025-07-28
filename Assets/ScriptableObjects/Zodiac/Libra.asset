@@ -21,4 +21,4 @@ MonoBehaviour:
   flipCountWeight: 4
   earlyTurnStandard: 2
   earlyTurnPenalty: 4
-  surroundingCardBase: 4
+  surroundingCardBase: 5

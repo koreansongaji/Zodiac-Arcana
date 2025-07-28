@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName: Perseus
   left: 7
-  top: 6
+  top: 5
   right: 8
   bottom: 6
   type: 0

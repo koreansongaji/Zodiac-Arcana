@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Sagittarius
   m_EditorClassIdentifier: 
   cardName: Sagittarius
-  left: 1
-  top: 1
-  right: 1
-  bottom: 8
+  left: 4
+  top: 8
+  right: 4
+  bottom: 1
   type: 3
   flipCountWeight: 6
   earlyTurnStandard: 2
