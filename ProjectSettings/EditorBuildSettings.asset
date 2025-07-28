@@ -26,6 +26,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/V0.1.2 Release/Stage 5.unity
     guid: 64fe0668cbbc2bf41bfb66e4c3225eb2
+  - enabled: 1
+    path: Assets/Scenes/Develop/Opening Cutscene.unity
+    guid: bbf282162f1060746aa7f532510df481
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 3e557497d3c9ce2448cb20820d813bef,
       type: 2}

@@ -5621,7 +5621,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 735981823}
+      - m_Target: {fileID: 475407046}
         m_TargetAssemblyTypeName: LevelLoader, Assembly-CSharp
         m_MethodName: LoadSetLevel
         m_Mode: 3
@@ -10773,6 +10773,86 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffd2938b794816b4d84839e840913498, type: 3}
+--- !u!1001 &475407045
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 863621322887610439, guid: 00ea42954d2dc2a40ace6183971aaed7,
+        type: 3}
+      propertyPath: m_Name
+      value: SceneManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 2121336766006301237, guid: 00ea42954d2dc2a40ace6183971aaed7,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -23.770065
+      objectReference: {fileID: 0}
+    - target: {fileID: 2121336766006301237, guid: 00ea42954d2dc2a40ace6183971aaed7,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -6.214309
+      objectReference: {fileID: 0}
+    - target: {fileID: 2121336766006301237, guid: 00ea42954d2dc2a40ace6183971aaed7,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 588.50854
+      objectReference: {fileID: 0}
+    - target: {fileID: 2121336766006301237, guid: 00ea42954d2dc2a40ace6183971aaed7,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2121336766006301237, guid: 00ea42954d2dc2a40ace6183971aaed7,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2121336766006301237, guid: 00ea42954d2dc2a40ace6183971aaed7,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2121336766006301237, guid: 00ea42954d2dc2a40ace6183971aaed7,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2121336766006301237, guid: 00ea42954d2dc2a40ace6183971aaed7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2121336766006301237, guid: 00ea42954d2dc2a40ace6183971aaed7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2121336766006301237, guid: 00ea42954d2dc2a40ace6183971aaed7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 00ea42954d2dc2a40ace6183971aaed7, type: 3}
+--- !u!114 &475407046 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5207974793962203468, guid: 00ea42954d2dc2a40ace6183971aaed7,
+    type: 3}
+  m_PrefabInstance: {fileID: 475407045}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd2ffb0c943462c4d810e4a42c18f4b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &554212263
 GameObject:
   m_ObjectHideFlags: 0
@@ -11592,18 +11672,6 @@ RectTransform:
   m_AnchoredPosition: {x: 126, y: 32}
   m_SizeDelta: {x: 181.956, y: 126.871}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &735981823 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5207974793962203468, guid: 00ea42954d2dc2a40ace6183971aaed7,
-    type: 3}
-  m_PrefabInstance: {fileID: 1250762396}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd2ffb0c943462c4d810e4a42c18f4b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &937289648
 GameObject:
   m_ObjectHideFlags: 0
@@ -12219,79 +12287,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc56811fbce78304bb2e8de31e381cfe, type: 3}
---- !u!1001 &1250762396
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 863621322887610439, guid: 00ea42954d2dc2a40ace6183971aaed7,
-        type: 3}
-      propertyPath: m_Name
-      value: LevelManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 863621322887610439, guid: 00ea42954d2dc2a40ace6183971aaed7,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2121336766006301237, guid: 00ea42954d2dc2a40ace6183971aaed7,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -23.770065
-      objectReference: {fileID: 0}
-    - target: {fileID: 2121336766006301237, guid: 00ea42954d2dc2a40ace6183971aaed7,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -6.214309
-      objectReference: {fileID: 0}
-    - target: {fileID: 2121336766006301237, guid: 00ea42954d2dc2a40ace6183971aaed7,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 588.50854
-      objectReference: {fileID: 0}
-    - target: {fileID: 2121336766006301237, guid: 00ea42954d2dc2a40ace6183971aaed7,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2121336766006301237, guid: 00ea42954d2dc2a40ace6183971aaed7,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2121336766006301237, guid: 00ea42954d2dc2a40ace6183971aaed7,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2121336766006301237, guid: 00ea42954d2dc2a40ace6183971aaed7,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2121336766006301237, guid: 00ea42954d2dc2a40ace6183971aaed7,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2121336766006301237, guid: 00ea42954d2dc2a40ace6183971aaed7,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2121336766006301237, guid: 00ea42954d2dc2a40ace6183971aaed7,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 00ea42954d2dc2a40ace6183971aaed7, type: 3}
 --- !u!1 &1264258226
 GameObject:
   m_ObjectHideFlags: 0
@@ -12388,7 +12383,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 735981823}
+      - m_Target: {fileID: 475407046}
         m_TargetAssemblyTypeName: LevelLoader, Assembly-CSharp
         m_MethodName: LoadSetLevel
         m_Mode: 3
@@ -13532,7 +13527,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 735981823}
+      - m_Target: {fileID: 475407046}
         m_TargetAssemblyTypeName: LevelLoader, Assembly-CSharp
         m_MethodName: LoadSetLevel
         m_Mode: 3
@@ -13708,7 +13703,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 735981823}
+      - m_Target: {fileID: 475407046}
         m_TargetAssemblyTypeName: LevelLoader, Assembly-CSharp
         m_MethodName: LoadSetLevel
         m_Mode: 3
@@ -13883,7 +13878,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 735981823}
+      - m_Target: {fileID: 475407046}
         m_TargetAssemblyTypeName: LevelLoader, Assembly-CSharp
         m_MethodName: LoadSetLevel
         m_Mode: 3
@@ -14203,9 +14198,9 @@ SceneRoots:
   - {fileID: 937289650}
   - {fileID: 86513671}
   - {fileID: 1506893037}
-  - {fileID: 1250762396}
   - {fileID: 1395582610}
   - {fileID: 1228632748}
   - {fileID: 417265912}
   - {fileID: 1427713933}
   - {fileID: 2082616333}
+  - {fileID: 475407045}
