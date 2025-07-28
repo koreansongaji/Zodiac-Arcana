@@ -31,7 +31,6 @@ public class LineCreator : MonoBehaviour
     private IEnumerator AnimateLine(float time)
     {
         float elapsed = 0f; 
-        Debug.Log("Run");
         while (elapsed < time)
         {
 

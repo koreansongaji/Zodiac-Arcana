@@ -1944,6 +1944,7 @@ MonoBehaviour:
   - {fileID: 563997631}
   - {fileID: 1062011885}
   _loadLevel: {fileID: 176878717}
+  _duration: 1
 --- !u!1 &2132286813
 GameObject:
   m_ObjectHideFlags: 0
