@@ -31,11 +31,11 @@ public class LineCreator : MonoBehaviour
     private IEnumerator AnimateLine(float time)
     {
         float elapsed = 0f; 
-        Debug.Log("Run");
         while (elapsed < time)
         {
 
             float t = elapsed / time;
+            t = Mathf.Pow(2, 10 * (t - 1));
             float currValue = Mathf.Lerp(0.5f, 0f, t);
             _lineShader.material.SetFloat("_Progress", currValue);
             elapsed += Time.deltaTime;

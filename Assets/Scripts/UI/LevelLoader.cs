@@ -9,14 +9,6 @@ public class LevelLoader : MonoBehaviour
 {
     [SerializeField] private Animator _transition;
     [SerializeField] private float _transitionTime = 0.1f;
-    /*private void Update()
-    {
-        //if (Input.GetMouseButtonDown(0))
-        //LoadNextLevel();
-        //_transition.Play("Crossfade_Start");
-       
-    }*/
-
     public void LoadNextLevel() => StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
 
     public void LoadSetLevel(int levelIndex) => StartCoroutine(LoadLevel(levelIndex));
@@ -45,6 +37,7 @@ public class LevelLoader : MonoBehaviour
     {
         {"Title Scene", (0,0)},
         {"Level Select", (0,1)},
+        //{"Opening Cutscene" , (2,0)},
         {"Stage 1", (1,0)},
         {"Stage 2", (1,0)},
         {"Stage 3", (1,0)},
