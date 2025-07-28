@@ -28,11 +28,11 @@ namespace SimpleAudioManager
         private Song.Data _currentSongData;
         private int _currentSongIndex = 0;
         private int _currentIntensityIndex = 0;
-        
+
         /// <summary>
         /// The time before either a non-looping clip ends or the next loop of a looping clip begins
         /// </summary>
-        public float clipTimeRemaining => (_nextLoopStartTime != 0f) ? ((float)(_nextLoopStartTime - AudioSettings.dspTime) + ((!loopCurrentSong)? _currentSongData.reverbTail : 0f)) : 0f;
+        public float clipTimeRemaining => (_nextLoopStartTime != 0f) ? ((float)(_nextLoopStartTime - AudioSettings.dspTime) + ((!loopCurrentSong) ? _currentSongData.reverbTail : 0f)) : 0f;
         private double _nextLoopStartTime = 0;
         [Tooltip("Should the manager play the first song on awake?")] public bool playOnAwake = true;
         [Tooltip("The maximum volume for the audio clips.")][Range(0f, 1f)] public float maxVolume = 1f;
@@ -52,7 +52,8 @@ namespace SimpleAudioManager
             "  -Set the reverb tail time\n" +
             "    (Seconds before the end of a clip to loop it)\n" +
             "    (Shown in parentheses on Ovani Folders)\n" +
-            "  -Drag & Drop your songs onto this list")] [SerializeField] private List<Song> _songs = new List<Song>();
+            "  -Drag & Drop your songs onto this list")]
+        [SerializeField] private List<Song> _songs = new List<Song>();
         private List<Song.Data> _data = new List<Song.Data>();
 
         #endregion
@@ -71,7 +72,8 @@ namespace SimpleAudioManager
         {
             if (_currentSongData.intensityClips.Count > Mathf.Max(pIntensity, 0))
             {
-                PlaySong( new PlaySongOptions() {
+                PlaySong(new PlaySongOptions()
+                {
                     song = _currentSongIndex,
                     intensity = Mathf.Max(pIntensity, 0),
                     startTime = sourcePool[_currentSourceIndex].time,
@@ -87,12 +89,13 @@ namespace SimpleAudioManager
         /// <summary>
         /// Plays the specified song and attempts to match the current intensity
         /// </summary>
-        public void PlaySong(int pSong) => PlaySong( new PlaySongOptions() {
-                song = pSong,
-                intensity = _currentIntensityIndex,
-                blendOutTime = defaultSongBlendDuration,
-                blendInTime = defaultSongBlendDuration
-            });
+        public void PlaySong(int pSong) => PlaySong(new PlaySongOptions()
+        {
+            song = pSong,
+            intensity = _currentIntensityIndex,
+            blendOutTime = defaultSongBlendDuration,
+            blendInTime = defaultSongBlendDuration
+        });
 
         /// <summary>
         /// Plays the specified song
@@ -268,12 +271,13 @@ namespace SimpleAudioManager
             }
 
             //  If looping, play the song
-            PlaySong( new PlaySongOptions() {
-                    song = _currentSongIndex,
-                    intensity = _currentIntensityIndex,
-                    blendOutTime = -1f,
-                    blendInTime = 0.01f
-                });
+            PlaySong(new PlaySongOptions()
+            {
+                song = _currentSongIndex,
+                intensity = _currentIntensityIndex,
+                blendOutTime = -1f,
+                blendInTime = 0.01f
+            });
         }
 
         #endregion
