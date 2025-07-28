@@ -235,11 +235,71 @@ PrefabInstance:
       propertyPath: m_Name
       value: V0.1.2 Stage 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8219219003550057018, guid: 36ce829edeefe18428bdd6dce9ce198d,
+        type: 3}
+      propertyPath: _enemyCards.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8219219003550057018, guid: 36ce829edeefe18428bdd6dce9ce198d,
+        type: 3}
+      propertyPath: _enemyCards.Array.data[0]
+      value: 
+      objectReference: {fileID: 250679968}
+    - target: {fileID: 8219219003550057018, guid: 36ce829edeefe18428bdd6dce9ce198d,
+        type: 3}
+      propertyPath: _enemyCards.Array.data[1]
+      value: 
+      objectReference: {fileID: 250679967}
+    - target: {fileID: 8219219003550057018, guid: 36ce829edeefe18428bdd6dce9ce198d,
+        type: 3}
+      propertyPath: _enemyCards.Array.data[2]
+      value: 
+      objectReference: {fileID: 250679966}
+    - target: {fileID: 8219219003550057018, guid: 36ce829edeefe18428bdd6dce9ce198d,
+        type: 3}
+      propertyPath: _enemyCards.Array.data[3]
+      value: 
+      objectReference: {fileID: 250679965}
+    - target: {fileID: 8219219003550057018, guid: 36ce829edeefe18428bdd6dce9ce198d,
+        type: 3}
+      propertyPath: _enemyCards.Array.data[4]
+      value: 
+      objectReference: {fileID: 250679964}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36ce829edeefe18428bdd6dce9ce198d, type: 3}
+--- !u!1 &250679964 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 54602299580169547, guid: 36ce829edeefe18428bdd6dce9ce198d,
+    type: 3}
+  m_PrefabInstance: {fileID: 250679963}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &250679965 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2958112580850627917, guid: 36ce829edeefe18428bdd6dce9ce198d,
+    type: 3}
+  m_PrefabInstance: {fileID: 250679963}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &250679966 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3019980961177536725, guid: 36ce829edeefe18428bdd6dce9ce198d,
+    type: 3}
+  m_PrefabInstance: {fileID: 250679963}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &250679967 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7777825121300585185, guid: 36ce829edeefe18428bdd6dce9ce198d,
+    type: 3}
+  m_PrefabInstance: {fileID: 250679963}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &250679968 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1629515356782364920, guid: 36ce829edeefe18428bdd6dce9ce198d,
+    type: 3}
+  m_PrefabInstance: {fileID: 250679963}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &481049548
 GameObject:
   m_ObjectHideFlags: 0

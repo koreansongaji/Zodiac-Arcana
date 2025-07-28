@@ -9,7 +9,7 @@ public enum TurnState { PlayerTurn, EnemyTurn }
 public class BattleManager : Singleton<BattleManager>
 {
     public TurnState CurrentTurn { get; private set; } //읽기만 가능
-    public int Stage; // 현재 스테이지 번호
+    public int stage; // 현재 스테이지 번호
 
     [Tooltip("플레이어나 적이 한 번 행동하면 라운드가 증가")]
     public int Round; // 플레이어나 적이 한 번 행동하면 라운드가 증가
@@ -37,7 +37,9 @@ public class BattleManager : Singleton<BattleManager>
         EnemySlots = new List<GameObject>();
         FieldSlots = new List<GameObject>();
         Round = 0;
-        Stage = 0;
+        stage = 0;
+        GameManager.Instance.SaveDataLoad(); // 게임 매니저에서 저장 데이터 불러오기
+        stage = GameManager.Instance.StageData.Stage; // 게임 매니저에서 스테이지 정보 가져오기
         PlayerTeamBuff = new CardStats(0, 0, 0, 0);
         EnemyTeamBuff = new CardStats(0, 0, 0, 0);
         CurrentTurn = TurnState.EnemyTurn; // 초기 턴은 플레이어 턴
@@ -48,15 +50,22 @@ public class BattleManager : Singleton<BattleManager>
     {
         StartEnemyTurn();
     }
+    private void OnEnable()
+    {
+    }
     private void FixedUpdate()
     {
+        if(!CheckStage())
+        {
+            return; // 스테이지가 아닌 경우 업데이트 중지
+        }
         if(CurrentTurn == TurnState.PlayerTurn)
         {
             PlayerTime -= Time.fixedDeltaTime;
             if (PlayerTime <= 0)
             {
                 PlayerTime = 0;
-                PlayerLose(); // 플레이어 턴 시간 초과 시
+
             }
         }
         else if(CurrentTurn == TurnState.EnemyTurn)
@@ -65,7 +74,7 @@ public class BattleManager : Singleton<BattleManager>
             if (EnemyTime <= 0)
             {
                 EnemyTime = 0;
-                PlayerWin(); // 적 턴 시간 초과 시
+
             }
         }
     }
@@ -101,33 +110,45 @@ public class BattleManager : Singleton<BattleManager>
     {
         StartPlayerTurn();
     }
-    public void StartStage(int stage)
+    public void ResetStage(int stage)
     {
-        Stage = stage;
+        CurrentTurn = TurnState.EnemyTurn; // 스테이지 리셋 시 적 턴으로 초기화
+        this.stage = stage;
         Round = 0;
         PlayerCards.Clear();
         EnemyCards.Clear();
         PlayerSlots.Clear();
         EnemySlots.Clear();
         FieldSlots.Clear();
+        
         //Debug.Log($"스테이지 {Stage} 시작");
-        StartPlayerTurn();
+        StartEnemyTurn();
     }
     public void EndStage()
     {
-        if(PlayerCards.Count > EnemyCards.Count)
+        if (PlayerCards.Count > EnemyCards.Count)
         {
-            Debug.Log($"스테이지 {Stage} 클리어! 플레이어 승리!");
+            Debug.Log($"스테이지 {stage} 클리어! 플레이어 승리!");
             PlayerWin();
         }
         else
         {
-            Debug.Log($"스테이지 {Stage} 실패! 적 승리!");
+            Debug.Log($"스테이지 {stage} 실패! 적 승리!");
             PlayerLose();
         }
     }
+    public bool CheckStage()
+    {
+        return ((SceneManager.GetActiveScene().name == "Stage 1") || (SceneManager.GetActiveScene().name == "Stage 2")
+            || (SceneManager.GetActiveScene().name == "Stage 3") || (SceneManager.GetActiveScene().name == "Stage 4")
+            || (SceneManager.GetActiveScene().name == "Stage 5"));
+    }
     public void StartTurn()
     {
+        if(!CheckStage())
+        {
+            return;
+        }
         Round++;
         //Debug.Log($"스테이지 {Stage} 라운드 {Round} 시작");
 
@@ -167,8 +188,11 @@ public class BattleManager : Singleton<BattleManager>
                 card.GetComponent<CardStatus>().ChangeStatus(EnemyTeamBuff);
             //}
         }
-        BattleManager.Instance.BattleUI.CardCount();
-        if (Round >= 10)
+        if(BattleManager.Instance.BattleUI != null)
+        {
+            BattleManager.Instance.BattleUI.CardCount();
+        }
+        if (Round >= 9)
         {
             Debug.Log("라운드 10에 도달했습니다. 스테이지를 종료합니다.");
             EndStage(); // 라운드 10에 도달하면 스테이지 종료
@@ -183,18 +207,57 @@ public class BattleManager : Singleton<BattleManager>
         {
             EnemyTime = 31.0f; // 적 턴 시간 초기화
         }
-
-        BattleUI.ChangeTurnIndicator(CurrentTurn);
+        if(BattleUI != null)
+        {
+            BattleUI.ChangeTurnIndicator(CurrentTurn);
+        }
     }
     public void PlayerWin()
     {
-        GameManager.Instance.SaveDataLoad();
-        GameManager.Instance.StageData.Stage = Stage + 1; // 스테이지 증가
-        GameManager.Instance.SaveDataSave();
-        SceneManager.LoadScene("Level Select"); // 레벨 선택 화면으로 이동
+        SetStageLevel();
+        StartCoroutine(GoToLevelSelevt()); // 2초 후 레벨 선택 화면으로 이동
     }
     public void PlayerLose()
     {
-        SceneManager.LoadScene("Level Select"); // 게임 오버 화면으로 이동
+        StartCoroutine(GoToLevelSelevt()); // 2초 후 레벨 선택 화면으로 이동
+    }
+
+    private void SetStageLevel()
+    {
+        string stageLevel = SceneManager.GetActiveScene().name;
+
+        switch (stageLevel)
+        {
+            case "Stage 1":
+                stage = 1;
+                break;
+            case "Stage 2":
+                stage = 2;
+                break;
+            case "Stage 3":
+                stage = 3;
+                break;
+            case "Stage 4":
+                stage = 4;
+                break;
+            case "Stage 5":
+                stage = 5;
+                break;
+            default:
+                stage = 0; // 기본값
+                break;
+        }
+
+        if(stage > GameManager.Instance.StageData.Stage)
+        {
+            GameManager.Instance.StageData.Stage = stage; // 현재 스테이지가 저장된 스테이지보다 높으면 업데이트
+            GameManager.Instance.SaveDataSave(); // 저장 데이터 저장
+        }
+    }
+    IEnumerator GoToLevelSelevt()
+    {
+        yield return new WaitForSeconds(2f); // 1초 대기
+        ResetStage(GameManager.Instance.StageData.Stage); // 스테이지 초기화
+        SceneManager.LoadScene("Level Select"); // 레벨 선택 화면으로 이동
     }
 }
