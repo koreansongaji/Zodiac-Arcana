@@ -35,6 +35,7 @@ public class LevelSelect : MonoBehaviour
         {
             LineCreator lineDraw = _levelConnector[j].GetComponentInChildren<LineCreator>();
             lineDraw.LineDrawer();
+            SFXManager.instance.PlaySFXClipDelayed(_connectorSoundClip, transform, 0.5f,0f);
         }
        
 

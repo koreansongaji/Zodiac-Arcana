@@ -36,6 +36,7 @@ public class LineCreator : MonoBehaviour
         {
 
             float t = elapsed / time;
+            t = Mathf.Pow(2, 10 * (t - 1));
             float currValue = Mathf.Lerp(0.5f, 0f, t);
             _lineShader.material.SetFloat("_Progress", currValue);
             elapsed += Time.deltaTime;

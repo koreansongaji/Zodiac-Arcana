@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50f2bbd1158c56e4ebc6835fd7cb9d36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _duration: 2
+  _duration: 1.8
   _openStage: {fileID: 2049847502}
 --- !u!212 &7996144
 SpriteRenderer:
@@ -365,7 +365,7 @@ MonoBehaviour:
   - {fileID: 685860669}
   - {fileID: 1689711280}
   _stageClickSoundClip: []
-  _connectorSoundClip: {fileID: 0}
+  _connectorSoundClip: {fileID: 8300000, guid: eb2139244258b2a478ae1009c1dcb9ff, type: 3}
 --- !u!1 &126588381
 GameObject:
   m_ObjectHideFlags: 0
@@ -5756,7 +5756,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50f2bbd1158c56e4ebc6835fd7cb9d36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _duration: 2
+  _duration: 1.8
   _openStage: {fileID: 1264258228}
 --- !u!222 &373426927
 CanvasRenderer:
@@ -12629,7 +12629,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50f2bbd1158c56e4ebc6835fd7cb9d36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _duration: 2
+  _duration: 1.8
   _openStage: {fileID: 344451725}
 --- !u!222 &1348243567
 CanvasRenderer:
@@ -13164,7 +13164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50f2bbd1158c56e4ebc6835fd7cb9d36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _duration: 2
+  _duration: 1.8
   _openStage: {fileID: 1976069963}
 --- !u!222 &1789706540
 CanvasRenderer:

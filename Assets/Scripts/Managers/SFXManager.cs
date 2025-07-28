@@ -24,4 +24,19 @@ public class SFXManager : MonoBehaviour
         float clipLength = audioSource.clip.length;
         Destroy(audioSource.gameObject, clipLength);
     }
+    public void PlaySFXClipDelayed(AudioClip audioClip, Transform spawnTransform, float volume, float delay)
+    {
+        StartCoroutine(DelayClip(audioClip, spawnTransform, volume, delay));
+    }
+
+    private IEnumerator DelayClip(AudioClip audioClip, Transform spawnTransform, float volume, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        AudioSource audioSource = Instantiate(sfxObject, spawnTransform.position, Quaternion.identity);
+        audioSource.clip = audioClip;
+        audioSource.Play();
+        float clipLength = audioSource.clip.length;
+        Destroy(audioSource.gameObject, clipLength);
+    }
+
 }
