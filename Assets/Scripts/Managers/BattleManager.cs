@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public enum TurnState { PlayerTurn, EnemyTurn }
@@ -114,6 +115,16 @@ public class BattleManager : Singleton<BattleManager>
     }
     public void EndStage()
     {
+        if(PlayerCards.Count > EnemyCards.Count)
+        {
+            Debug.Log($"스테이지 {Stage} 클리어! 플레이어 승리!");
+            PlayerWin();
+        }
+        else
+        {
+            Debug.Log($"스테이지 {Stage} 실패! 적 승리!");
+            PlayerLose();
+        }
     }
     public void StartTurn()
     {
@@ -177,10 +188,13 @@ public class BattleManager : Singleton<BattleManager>
     }
     public void PlayerWin()
     {
-
+        GameManager.Instance.SaveDataLoad();
+        GameManager.Instance.StageData.Stage = Stage + 1; // 스테이지 증가
+        GameManager.Instance.SaveDataSave();
+        SceneManager.LoadScene("Level Select"); // 레벨 선택 화면으로 이동
     }
     public void PlayerLose()
     {
-
+        SceneManager.LoadScene("Level Select"); // 게임 오버 화면으로 이동
     }
 }

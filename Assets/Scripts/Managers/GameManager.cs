@@ -10,7 +10,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private TMP_InputField _inputField;
     //---------- 파일 저장 관련 변수 ----------
     private string saveFilePath;
-    public SaveData saveData = new SaveData();
+    public SaveData StageData = new SaveData();
     private void Awake()
     {
         base.Awake();
@@ -57,8 +57,8 @@ public class GameManager : Singleton<GameManager>
             data = JsonUtility.FromJson<SaveData>(json);
             if(data != null)
             {
-                saveData = new SaveData(); // 기존 saveData를 초기화
-                saveData = data; // 불러온 데이터를 saveData에 저장
+                StageData = new SaveData(); // 기존 saveData를 초기화
+                StageData = data; // 불러온 데이터를 saveData에 저장
             }
             Debug.Log(json);
         }
@@ -73,10 +73,10 @@ public class GameManager : Singleton<GameManager>
     public void SaveDataSave()
     {
         SaveData data = new SaveData();
-        data = saveData; // 현재 saveData를 저장할 데이터로 설정
+        data = StageData; // 현재 saveData를 저장할 데이터로 설정
         string json = JsonUtility.ToJson(data, true);
         File.WriteAllText(saveFilePath, json);
-        saveData = data; // 저장 후 saveData에 저장
+        StageData = data; // 저장 후 saveData에 저장
         Debug.Log(json);
     }
     public void SaveDataDelete()
@@ -84,17 +84,17 @@ public class GameManager : Singleton<GameManager>
         if (File.Exists(saveFilePath))
         {
             File.Delete(saveFilePath);
-            saveData = new SaveData(); // saveData를 초기화
+            StageData = new SaveData(); // saveData를 초기화
         }
     }
     public void SaveDataClear()
     {
-        saveData = new SaveData(); // saveData를 초기화
+        StageData = new SaveData(); // saveData를 초기화
         SaveDataSave(); // 초기화된 데이터를 저장
     }
     public void TestFile()
     {
         int stage = int.Parse(_inputField.text);
-        saveData.Stage = stage;
+        StageData.Stage = stage;
     }
 }
