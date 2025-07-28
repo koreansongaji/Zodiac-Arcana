@@ -38,6 +38,7 @@ public class LevelLoader : MonoBehaviour
         {"Title Scene", (0,0)},
         {"Level Select", (0,1)},
         {"Opening Cutscene" , (2,0)},
+        {"Ending Cutscene",(3,2)},
         {"Stage 1", (1,0)},
         {"Stage 2", (1,0)},
         {"Stage 3", (1,0)},
