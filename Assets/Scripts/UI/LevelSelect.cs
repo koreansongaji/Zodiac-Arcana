@@ -7,6 +7,8 @@ public class LevelSelect : MonoBehaviour
 {
     [SerializeField] private List<Button> _levelButtons;
     [SerializeField] private List<GameObject> _levelConnector;
+    [SerializeField] private List<AudioClip> _stageClickSoundClip;
+    [SerializeField] private AudioClip _connectorSoundClip;
     private int _levelsCleared = 0;
     void Start()
     {
