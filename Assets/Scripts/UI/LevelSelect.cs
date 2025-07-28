@@ -17,7 +17,7 @@ public class LevelSelect : MonoBehaviour
     private int _levelsCleared = 0;
     void Start()
     {
-        _levelsCleared = 3;
+        _levelsCleared = 0;
         UnlockStagesSound(_levelsCleared);
     }
     public void MouseHoverSound()
@@ -40,12 +40,18 @@ public class LevelSelect : MonoBehaviour
             SpriteRenderer outline = _levelButtons[i].GetComponentInChildren<SpriteRenderer>();
             outline.enabled = i <= levelsCleared-1;
         }
+        if(levelsCleared == 0)
+        {
+            _levelButtons[0].interactable = true;
+            SpriteRenderer outline = _levelButtons[0].GetComponentInChildren<SpriteRenderer>();
+            outline.enabled = true;
+        }
         for(j = 0; j <levelsCleared-1 && j < _levelConnector.Count; j++)
         {
             LineCreator lineDraw = _levelConnector[j].GetComponentInChildren<LineCreator>();
             lineDraw.EnableConnector();
         }
-        if(levelsCleared < _levelConnector.Count)
+        if(levelsCleared < _levelConnector.Count && levelsCleared != 0)
         {
             LineCreator lineDraw = _levelConnector[j].GetComponentInChildren<LineCreator>();
             lineDraw.LineDrawer();
