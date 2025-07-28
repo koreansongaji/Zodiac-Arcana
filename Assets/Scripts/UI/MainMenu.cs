@@ -10,6 +10,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private AudioClip _backSoundClip;
     [SerializeField] private AudioClip _startSoundClip;
     [SerializeField] private AudioClip _soundBarAdjustSoundClip;
+
     public void MouseHover()
     {
         SFXManager.instance.PlaySFXClip(_hoverSoundClip, transform, 1f);
