@@ -9,7 +9,31 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private AudioClip _backSoundClip;
     [SerializeField] private AudioClip _startSoundClip;
     [SerializeField] private AudioClip _soundBarAdjustSoundClip;
+    [SerializeField] private LevelLoader _levelLoader;
 
+    private int _levelsCleared = 0;
+
+    private void Start()
+    {
+        RefreshGameData();
+    }
+
+    public void RefreshGameData()
+    {
+        GameManager.Instance.SaveDataLoad();
+        _levelsCleared = GameManager.Instance.StageData.Stage;
+    }
+    public void NewGameCheck()
+    {
+        if(_levelsCleared == 0)
+        {
+            _levelLoader.LoadSetLevel(7);
+        }
+        else
+        {
+            _levelLoader.LoadSetLevel(1);
+        }
+    }
     public void MouseHover()
     {
         SFXManager.instance.PlaySFXClip(_hoverSoundClip, transform, 1f);

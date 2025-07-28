@@ -260,11 +260,21 @@ public class BattleManager : Singleton<BattleManager>
     public void PlayerWin()
     {
         SetStageLevel();
-        StartCoroutine(GoToLevelSelevt()); // 2초 후 레벨 선택 화면으로 이동
+        //StartCoroutine(GoToLevelSelevt()); // 2초 후 레벨 선택 화면으로 이동
+        if(SceneManager.GetActiveScene().name.Equals("Stage 5"))
+        {
+            SceneManager.LoadScene("Ending Cutscene");
+        }
+        else
+        {
+            SceneManager.LoadScene("Level Select");
+        }
+
     }
     public void PlayerLose()
     {
-        StartCoroutine(GoToLevelSelevt()); // 2초 후 레벨 선택 화면으로 이동
+        //StartCoroutine(GoToLevelSelevt()); // 2초 후 레벨 선택 화면으로 이동
+        SceneManager.LoadScene("Level Select");
     }
 
     private void SetStageLevel()
