@@ -21,8 +21,20 @@ public class LevelLoader : MonoBehaviour
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
-    }
 
+    }
+    private void FixedUpdate()
+    {
+        if (SceneManager.GetActiveScene().name == "Level Select")
+        {
+            Debug.Log("Stage: " + GameManager.Instance.StageData.Stage);
+            if (GameManager.Instance.StageData.Stage >= 5)
+            {
+                Debug.Log("Loading Ending Cutscene");
+                LoadSetLevel(SceneManager.GetSceneByName("Ending Cutscene").buildIndex);
+            }
+        }
+    }
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
