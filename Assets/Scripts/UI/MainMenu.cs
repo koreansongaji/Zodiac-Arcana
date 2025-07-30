@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,5 +30,10 @@ public class MainMenu : MonoBehaviour
     public void StartClick()
     {
         SFXManager.instance.PlaySFXClip(_startSoundClip, transform, 1f);
+    }
+    public void ResetFile()
+    {
+        GameManager.Instance.StageData.Stage = 0; // 스테이지 초기화
+        GameManager.Instance.SaveDataSave(); // 저장 데이터 저장
     }
 }

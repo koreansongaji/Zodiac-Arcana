@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Canis Minor
   m_EditorClassIdentifier: 
   cardName: Canis Minor
-  left: 2
-  top: 1
-  right: -1
-  bottom: 5
-  type: 0
+  left: 5
+  top: 3
+  right: 4
+  bottom: 3
+  type: 4
   flipCountWeight: 10
   earlyTurnStandard: 3
   earlyTurnPenalty: 5

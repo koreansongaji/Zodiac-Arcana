@@ -129,6 +129,12 @@ public class BattleManager : Singleton<BattleManager>
         if (PlayerCards.Count > EnemyCards.Count)
         {
             Debug.Log($"스테이지 {stage} 클리어! 플레이어 승리!");
+            Debug.Log("Stage: " + GameManager.Instance.StageData.Stage);
+            if (GameManager.Instance.StageData.Stage >= 5)
+            {
+                Debug.Log("Loading Ending Cutscene");
+                SceneManager.LoadScene("Ending Cutscene");
+            }
             PlayerWin();
         }
         else
@@ -260,7 +266,14 @@ public class BattleManager : Singleton<BattleManager>
     public void PlayerWin()
     {
         SetStageLevel();
-        StartCoroutine(GoToLevelSelevt()); // 2초 후 레벨 선택 화면으로 이동
+        if(GameManager.Instance.StageData.Stage >= 5)
+        {
+            SceneManager.LoadScene("Ending Cutscene"); // 스테이지 5 클리어 시 엔딩 컷씬으로 이동
+        }
+        else
+        {
+            StartCoroutine(GoToLevelSelevt()); // 2초 후 레벨 선택 화면으로 이동
+        }
     }
     public void PlayerLose()
     {
@@ -287,6 +300,7 @@ public class BattleManager : Singleton<BattleManager>
                 break;
             case "Stage 5":
                 stage = 5;
+                SceneManager.LoadScene("Ending Cutscene"); // 스테이지 5 클리어 시 엔딩 컷씬으로 이동
                 break;
             default:
                 stage = 0; // 기본값
@@ -301,7 +315,13 @@ public class BattleManager : Singleton<BattleManager>
     }
     IEnumerator GoToLevelSelevt()
     {
-        yield return new WaitForSeconds(2f); // 1초 대기
+        yield return new WaitForSeconds(0f); // 1초 대기
+        Debug.Log("Stage: " + GameManager.Instance.StageData.Stage);
+        if (GameManager.Instance.StageData.Stage >= 5)
+        {
+            Debug.Log("Loading Ending Cutscene");
+            SceneManager.LoadScene("Ending Cutscene");
+        }
         ResetStage(GameManager.Instance.StageData.Stage); // 스테이지 초기화
         SceneManager.LoadScene("Level Select"); // 레벨 선택 화면으로 이동
     }

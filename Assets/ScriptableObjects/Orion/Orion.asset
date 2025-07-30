@@ -17,7 +17,7 @@ MonoBehaviour:
   top: 7
   right: 6
   bottom: 8
-  type: 0
+  type: 4
   flipCountWeight: 10
   earlyTurnStandard: 3
   earlyTurnPenalty: 5

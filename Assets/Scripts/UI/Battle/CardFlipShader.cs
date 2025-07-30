@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +7,7 @@ public class CardFlipShader : MonoBehaviour
     private Renderer _outlineShader;
     private Coroutine _animateCoroutine;
     [SerializeField] private float _duration = 1f;
-    void Start()
+    void Awake()
     {
         _outlineShader = GetComponent<Renderer>();
         _outlineShader.material = new Material(_outlineShader.sharedMaterial);

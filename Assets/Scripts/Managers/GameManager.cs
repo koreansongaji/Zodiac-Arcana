@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 //using static System.Net.WebRequestMethods;
 
@@ -27,9 +28,17 @@ public class GameManager : Singleton<GameManager>
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        if(SceneManager.GetActiveScene().name == "Level Select")
+        {
+        Debug.Log("Stage: " + GameManager.Instance.StageData.Stage);
+        if (GameManager.Instance.StageData.Stage >= 5)
+        {
+            Debug.Log("Loading Ending Cutscene");
+            SceneManager.LoadScene("Ending Cutscene");
+        }
+        }
     }
     /// <summary>
     /// 카드 리스트를 셔플하는 함수
