@@ -27,6 +27,7 @@ public class LevelLoader : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "Level Select")
         {
+            GameManager.Instance.StageData.Stage = 0;
             Debug.Log("Stage: " + GameManager.Instance.StageData.Stage);
             if (GameManager.Instance.StageData.Stage >= 5)
             {
